@@ -3,7 +3,7 @@ id: second-post
 title: Second Post
 author: Alex Seifert
 authorLink: https://www.alexseifert.com
-titledImage: /images/blog/posts/test-image.jpg
+titleImage: /images/blog/posts/test-image.jpg
 description: This is for the meta-description tag in the header for SEO.
 categories: ['news', 'test category', 'another category']
 tags: ['news tag', 'another tag']

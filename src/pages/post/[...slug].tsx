@@ -7,6 +7,34 @@ import ReactMarkdown from 'react-markdown';
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { getAllPostFiles, Post, getPost, convertFileNameToSlugParts, convertSlugToFileName } from '../../blog';
 
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  if (!Array.isArray(params.slug)) {
+    throw new Error(`Cannot determine the post slug for ${params.slug}!`);
+  }
+
+  const postName = convertSlugToFileName(params.slug);
+  const post = await getPost(postName);
+
+  return {
+    props: {
+      post
+    }
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const files = await getAllPostFiles();
+
+  const paths = files.map((file: string): any  => ({
+    params: { slug: convertFileNameToSlugParts(file) }
+  }));
+
+  return {
+    paths,
+    fallback: false
+  };
+};
+
 interface Props {
   post: Post;
 }
@@ -46,38 +74,6 @@ const PostPage: React.FC<Props> = ({ post }) => {
       </Link>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  if (!Array.isArray(params.slug)) {
-    throw new Error(`Cannot determine the post slug for ${params.slug}!`);
-  }
-
-  const postName = convertSlugToFileName(params.slug);
-  const post = await getPost(postName);
-
-  if (!post) {
-    throw new Error(`Could not find a post for ${postName}!`);
-  }
-
-  return {
-    props: {
-      post
-    }
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const files = await getAllPostFiles();
-
-  const paths = files.map((file: string): any  => ({
-    params: { slug: convertFileNameToSlugParts(file) }
-  }));
-
-  return {
-    paths,
-    fallback: false
-  };
 };
 
 export default PostPage;

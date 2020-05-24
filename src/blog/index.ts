@@ -51,40 +51,37 @@ export const convertSlugToFileName = (slugParts: string[]): string => {
 };
 
 
-export const getAllPostFiles = (): Promise<string[]> =>
-  new Promise((resolve, reject): void => {
-    fs.readdir(postsFolder, async (error: Error, files: string[]): Promise<void> => {
-      if (error) {
-        reject(error);
-      }
+export const getAllPostFiles = async (): Promise<string[]> => {
+  let files = await fs.promises.readdir(postsFolder);
+  files = files.filter((file: string): boolean => path.parse(file).ext === '.md');
+  return files.reverse();
+};
 
-      files = files.filter((file: string): boolean => path.parse(file).ext === '.md');
-      resolve(files.reverse());
-    });
-  });
+export const getPost = async (postName: string): Promise<Post> => {
+  try {
+    const post = `${postsFolder}/${postName}`;
 
-export const getPost = (postName: string): Promise<Post> =>
-  new Promise((resolve, reject): void => {
-    fs.readFile(`${postsFolder}/${postName}`, 'utf8', async (error: Error, data: string): Promise<void> => {
-      if (error) {
-        reject(error);
-      }
+    await fs.promises.access(post);
 
-      const parsedParts = data.split('---');
-      const parsedMetaData = YAML.parse(parsedParts[1]);
+    const data = await fs.promises.readFile(post, 'utf8');
+    const parsedParts = data.split('---');
+    const parsedMetaData = YAML.parse(parsedParts[1]);
 
-      const metaData = {
-        ...parsedMetaData,
-        excerpt: parsedMetaData.excerpt?.trim(),
-        slug: convertFileNameToSlug(postName)
-      };
+    const metaData = {
+      ...parsedMetaData,
+      excerpt: parsedMetaData.excerpt?.trim(),
+      slug: convertFileNameToSlug(postName)
+    };
 
-      resolve({
-        metaData,
-        body: parsedParts[2].trim()
-      });
-    });
-  });
+    return {
+      metaData,
+      body: parsedParts[2].trim()
+    };
+  }
+  catch(error) {
+    return;
+  }
+};
 
 export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[]> => {
   try {

@@ -7,6 +7,17 @@ import ReactMarkdown from 'react-markdown';
 import useStadandardHeaderTags from '../lib/useStandardHeaderTags';
 import { getMetaDataForPosts, PostMetaData } from '../blog';
 
+
+export const getStaticProps: GetStaticProps = async () => {
+  const postMetaData = await getMetaDataForPosts(10);
+
+  return {
+    props: {
+      postMetaData
+    }
+  };
+};
+
 interface Props {
   postMetaData: PostMetaData[];
 }
@@ -37,16 +48,6 @@ const Home: React.FC<Props> = ({ postMetaData }) => {
       ))}
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  const postMetaData = await getMetaDataForPosts(10);
-
-  return {
-    props: {
-      postMetaData
-    }
-  };
 };
 
 export default Home;
