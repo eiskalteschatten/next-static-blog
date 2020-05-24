@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { getAllPostFiles, Post, getPost, convertFileNameToSlugParts, convertSlugToFileName } from '../../blog';
+import CodeBlock from '../../components/CodeBlock';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!Array.isArray(params.slug)) {
@@ -66,7 +67,10 @@ const PostPage: React.FC<Props> = ({ post }) => {
       </div>
 
       <div>
-        <ReactMarkdown source={post.body} />
+        <ReactMarkdown
+          source={post.body}
+          renderers={{ code: CodeBlock }}
+        />
       </div>
 
       <Link href='/' passHref>
