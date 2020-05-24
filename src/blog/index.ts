@@ -42,6 +42,7 @@ export const convertFileNameToSlugParts = (fileName: string): string[] => {
   return slug.split('/');
 };
 
+
 export const convertSlugToFileName = (slugParts: string[]): string => {
   if (slugParts.length !== 4) {
     throw new Error(`${JSON.stringify(slugParts)} is an invalid slug and should follow this pattern: '2020/05/24/example-post'.`);
@@ -52,16 +53,22 @@ export const convertSlugToFileName = (slugParts: string[]): string => {
 
 
 export const getPostFiles = async (count?: number): Promise<string[]> => {
-  let files = await fs.promises.readdir(postsFolder);
-  files = files.filter((file: string): boolean => path.parse(file).ext === '.md');
-  files = files.reverse();
+  try {
+    let files = await fs.promises.readdir(postsFolder);
+    files = files.filter((file: string): boolean => path.parse(file).ext === '.md');
+    files = files.reverse();
 
-  if (count) {
-    files = files.splice(0, count);
+    if (count) {
+      files = files.splice(0, count);
+    }
+
+    return files;
   }
-
-  return files;
+  catch(error) {
+    console.error(error);
+  }
 };
+
 
 export const getPost = async (postName: string): Promise<Post> => {
   try {
@@ -85,9 +92,10 @@ export const getPost = async (postName: string): Promise<Post> => {
     };
   }
   catch(error) {
-    return;
+    console.error(error);
   }
 };
+
 
 export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[]> => {
   try {
@@ -106,16 +114,22 @@ export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[
   }
 };
 
+
 export const getMetaDataForCategoryPosts = async (categoryKey: string, count?: number): Promise<PostMetaData[]> => {
-  const files = await getPostFiles(count);
-  const metaData: PostMetaData[] = [];
+  try {
+    const files = await getPostFiles(count);
+    const metaData: PostMetaData[] = [];
 
-  for (const file of files) {
-    const parsedPost = await getPost(file);
-    if (parsedPost.metaData.categories.includes(categoryKey)) {
-      metaData.push(parsedPost.metaData);
+    for (const file of files) {
+      const parsedPost = await getPost(file);
+      if (parsedPost.metaData.categories.includes(categoryKey)) {
+        metaData.push(parsedPost.metaData);
+      }
     }
-  }
 
-  return metaData;
+    return metaData;
+  }
+  catch(error) {
+    console.error(error);
+  }
 };
