@@ -12,7 +12,6 @@ class Document extends NextDocument {
           <meta name='author' content='Alex Seifert' />
           <meta name='copyright' content='Copyright (c) Alex Seifert' />
           <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
-          <meta name='description' content='' />
 
           <link rel='icon' type='image/x-icon' href='/favicon.png' />
 

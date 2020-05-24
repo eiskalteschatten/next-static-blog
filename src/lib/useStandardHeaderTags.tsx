@@ -1,7 +1,8 @@
 import React from 'react';
 
-const useStandardHeaderTags = (title?: string): any => {
+const useStandardHeaderTags = (title?: string, description?: string): any => {
   const defaultTitle = 'Next.js Static Blog';
+  description = description || 'A static blog';
 
   return (
     <>
@@ -9,6 +10,8 @@ const useStandardHeaderTags = (title?: string): any => {
         ? (<title>{title} | {defaultTitle}</title>)
         : (<title>{defaultTitle}</title>)
       }
+
+      <meta name='description' content={description} />
     </>
   );
 };

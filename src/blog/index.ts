@@ -6,7 +6,6 @@ const postsFolder = path.resolve(`${process.cwd()}/src/blog/posts`);
 
 export interface PostMetaData {
   id: string;
-  slug: string;
   title: string;
   author: string;
   authorLink?: string;
@@ -16,12 +15,40 @@ export interface PostMetaData {
   tags?: string[];
   publishedDate: string;
   excerpt?: string;
+  slug: string;
 }
 
-interface ParsedPost {
+export interface Post {
   metaData: PostMetaData;
   body: string;
 }
+
+
+export const convertFileNameToSlug = (fileName: string): string => {
+  fileName = path.parse(fileName).name;
+  const slugParts = fileName.split('_');
+
+  if (slugParts.length !== 2) {
+    throw new Error(`${fileName} is an invalid file name and should follow this pattern: '2020-05-24_example-post'.`);
+  }
+
+  const date = slugParts[0].replace(/-/g, '/');
+  return `${date}/${slugParts[1]}`;
+};
+
+
+export const convertFileNameToSlugParts = (fileName: string): string[] => {
+  const slug = convertFileNameToSlug(fileName);
+  return slug.split('/');
+};
+
+export const convertSlugToFileName = (slugParts: string[]): string => {
+  if (slugParts.length !== 4) {
+    throw new Error(`${JSON.stringify(slugParts)} is an invalid slug and should follow this pattern: '2020/05/24/example-post'.`);
+  }
+
+  return `${slugParts[0]}-${slugParts[1]}-${slugParts[2]}_${slugParts[3]}.md`;
+};
 
 
 export const getAllPostFiles = (): Promise<string[]> =>
@@ -35,7 +62,7 @@ export const getAllPostFiles = (): Promise<string[]> =>
     });
   });
 
-export const parsePostFile = (postName: string): Promise<ParsedPost> =>
+export const getPost = (postName: string): Promise<Post> =>
   new Promise((resolve, reject): void => {
     fs.readFile(`${postsFolder}/${postName}`, 'utf8', async (error: Error, data: string): Promise<void> => {
       if (error) {
@@ -43,9 +70,13 @@ export const parsePostFile = (postName: string): Promise<ParsedPost> =>
       }
 
       const parsedParts = data.split('---');
+      const metaData = {
+        ...YAML.parse(parsedParts[1]),
+        slug: convertFileNameToSlug(postName)
+      };
 
       resolve({
-        metaData: YAML.parse(parsedParts[1]),
+        metaData,
         body: parsedParts[2]
       });
     });
@@ -61,7 +92,7 @@ export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[
     }
 
     for (const file of files) {
-      const parsedPost = await parsePostFile(file);
+      const parsedPost = await getPost(file);
       data.push(parsedPost.metaData);
     }
 
