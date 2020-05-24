@@ -1,6 +1,6 @@
 # Next.js Static Blog
 
-This repository is a repository for a boilerplate project that allows you to create a static-generated blog based on [Next.js](https://nextjs.org/) and Markdown.
+This is a repository for a boilerplate project that allows you to create a blog with automatically generated static pages based on [Next.js](https://nextjs.org/) and Markdown. It uses TypeScript as its primary language.
 
 Or at least that is the goal. This project is just getting started.
 
