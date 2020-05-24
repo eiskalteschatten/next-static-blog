@@ -5,7 +5,7 @@ author: Alex Seifert
 authorLink: https://www.alexseifert.com
 titleImage: /images/blog/posts/test-image.jpg
 description: This is for the meta-description tag in the header for SEO.
-categories: ['news', 'test category', 'another category']
+categories: ['news', 'testCategory', 'anotherCategory']
 tags: ['news tag', 'another tag']
 publishedDate: 2020-05-24T07:38:13
 excerpt: >
