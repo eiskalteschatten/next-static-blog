@@ -1,13 +1,28 @@
 import React from 'react';
+import { GetStaticProps } from 'next';
 
+import { getMetaDataForPosts, PostMetaData } from '../blog';
 
-const Home: React.FC = () => {
+interface Props {
+  postMetaData: PostMetaData[];
+}
+
+const Home: React.FC<Props> = ({ postMetaData }) => {
   return (
     <>
-      homepage
+      {JSON.stringify(postMetaData)}
     </>
   );
 };
 
+export const getStaticProps: GetStaticProps = async () => {
+  const postMetaData = await getMetaDataForPosts(10);
+
+  return {
+    props: {
+      postMetaData
+    }
+  };
+};
 
 export default Home;
