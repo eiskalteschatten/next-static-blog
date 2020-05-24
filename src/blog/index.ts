@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import YAML from 'yaml';
 
 const postsFolder = path.resolve(`${process.cwd()}/src/blog/posts`);
 
@@ -17,6 +18,11 @@ export interface PostMetaData {
   excerpt?: string;
 }
 
+interface ParsedPost {
+  metaData: PostMetaData;
+  body: string;
+}
+
 
 export const getAllPostFiles = (): Promise<string[]> =>
   new Promise((resolve, reject): void => {
@@ -29,36 +35,41 @@ export const getAllPostFiles = (): Promise<string[]> =>
     });
   });
 
-export const getPostMetaData = async (postName: string): Promise<PostMetaData> => {
-  return {
-    id: 'test',
-    slug: 'test',
-    title: 'test',
-    author: 'test',
-    authorLink: 'test',
-    titleImage: 'test',
-    description: 'test',
-    categories: ['test'],
-    tags: ['test'],
-    publishedDate: new Date().toISOString(),
-    excerpt: 'test'
-  };
-};
+export const parsePostFile = (postName: string): Promise<ParsedPost> =>
+  new Promise((resolve, reject): void => {
+    fs.readFile(`${postsFolder}/${postName}`, 'utf8', async (error: Error, data: string): Promise<void> => {
+      if (error) {
+        reject(error);
+      }
+
+      const parsedParts = data.split('---');
+
+      resolve({
+        metaData: YAML.parse(parsedParts[1]),
+        body: parsedParts[2]
+      });
+    });
+  });
 
 export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[]> => {
-  let files = await getAllPostFiles();
-  const data: PostMetaData[] = [];
+  try {
+    let files = await getAllPostFiles();
+    const data: PostMetaData[] = [];
 
-  if (count) {
-    files = files.splice(0, count);
+    if (count) {
+      files = files.splice(0, count);
+    }
+
+    for (const file of files) {
+      const parsedPost = await parsePostFile(file);
+      data.push(parsedPost.metaData);
+    }
+
+    return data;
   }
-
-  for (const file of files) {
-    const postMetaData = await getPostMetaData(file);
-    data.push(postMetaData);
+  catch(error) {
+    console.error(error);
   }
-
-  return data;
 };
 
 export const getAllPosts = async (): Promise<any> => {
