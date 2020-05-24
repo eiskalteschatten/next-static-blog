@@ -58,6 +58,7 @@ export const getAllPostFiles = (): Promise<string[]> =>
         reject(error);
       }
 
+      files = files.filter((file: string): boolean => path.parse(file).ext === '.md');
       resolve(files.reverse());
     });
   });
@@ -71,6 +72,7 @@ export const getPost = (postName: string): Promise<Post> =>
 
       const parsedParts = data.split('---');
       const parsedMetaData = YAML.parse(parsedParts[1]);
+
       const metaData = {
         ...parsedMetaData,
         excerpt: parsedMetaData.excerpt?.trim(),
