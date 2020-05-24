@@ -1,8 +1,10 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
+import Head from 'next/head';
 import ReactMarkdown from 'react-markdown';
 
+import useStadandardHeaderTags from '../lib/useStandardHeaderTags';
 import { getMetaDataForPosts, PostMetaData } from '../blog';
 
 interface Props {
@@ -12,6 +14,10 @@ interface Props {
 const Home: React.FC<Props> = ({ postMetaData }) => {
   return (
     <>
+      <Head>
+        {useStadandardHeaderTags()}
+      </Head>
+
       <div>
         These are the latest 10 posts:
       </div>
