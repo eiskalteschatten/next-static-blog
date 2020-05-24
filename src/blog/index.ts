@@ -70,14 +70,16 @@ export const getPost = (postName: string): Promise<Post> =>
       }
 
       const parsedParts = data.split('---');
+      const parsedMetaData = YAML.parse(parsedParts[1]);
       const metaData = {
-        ...YAML.parse(parsedParts[1]),
+        ...parsedMetaData,
+        excerpt: parsedMetaData.excerpt?.trim(),
         slug: convertFileNameToSlug(postName)
       };
 
       resolve({
         metaData,
-        body: parsedParts[2]
+        body: parsedParts[2].trim()
       });
     });
   });
