@@ -51,10 +51,16 @@ export const convertSlugToFileName = (slugParts: string[]): string => {
 };
 
 
-export const getAllPostFiles = async (): Promise<string[]> => {
+export const getPostFiles = async (count?: number): Promise<string[]> => {
   let files = await fs.promises.readdir(postsFolder);
   files = files.filter((file: string): boolean => path.parse(file).ext === '.md');
-  return files.reverse();
+  files = files.reverse();
+
+  if (count) {
+    files = files.splice(0, count);
+  }
+
+  return files;
 };
 
 export const getPost = async (postName: string): Promise<Post> => {
@@ -85,25 +91,35 @@ export const getPost = async (postName: string): Promise<Post> => {
 
 export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[]> => {
   try {
-    let files = await getAllPostFiles();
-    const data: PostMetaData[] = [];
-
-    if (count) {
-      files = files.splice(0, count);
-    }
+    const files = await getPostFiles(count);
+    const metaData: PostMetaData[] = [];
 
     for (const file of files) {
       const parsedPost = await getPost(file);
-      data.push(parsedPost.metaData);
+      metaData.push(parsedPost.metaData);
     }
 
-    return data;
+    return metaData;
   }
   catch(error) {
     console.error(error);
   }
 };
 
-export const getAllPosts = async (): Promise<any> => {
+export const getAllPosts = async (count?: number): Promise<Post[]> => {
+  return [];
+};
 
+export const getMetaDataForCategoryPosts = async (categoryKey: string, count?: number): Promise<PostMetaData[]> => {
+  const files = await getPostFiles(count);
+  const metaData: PostMetaData[] = [];
+
+  for (const file of files) {
+    const parsedPost = await getPost(file);
+    if (parsedPost.metaData.categories.includes(categoryKey)) {
+      metaData.push(parsedPost.metaData);
+    }
+  }
+
+  return metaData;
 };

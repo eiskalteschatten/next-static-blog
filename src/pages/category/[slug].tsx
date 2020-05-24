@@ -5,26 +5,27 @@ import Head from 'next/head';
 import ReactMarkdown from 'react-markdown';
 
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
-import { PostMetaData } from '../../blog';
+import { PostMetaData, getMetaDataForCategoryPosts } from '../../blog';
 import categories, { Category } from '../../blog/categories';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // get all posts in the category
   let categoryKey;
+  let category;
 
   for (const key in categories) {
     if (categories[key].slug === params.slug) {
       categoryKey = key;
+      category = categories[key];
       break;
     }
   }
 
-  const posts = [];
+  const postMetaData = await getMetaDataForCategoryPosts(categoryKey);
 
   return {
     props: {
-      category: categories[categoryKey],
-      posts
+      category,
+      postMetaData
     }
   };
 };

@@ -5,7 +5,7 @@ import Head from 'next/head';
 import ReactMarkdown from 'react-markdown';
 
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
-import { getAllPostFiles, Post, getPost, convertFileNameToSlugParts, convertSlugToFileName } from '../../blog';
+import { getPostFiles, Post, getPost, convertFileNameToSlugParts, convertSlugToFileName } from '../../blog';
 import categories from '../../blog/categories';
 import CodeBlock from '../../components/CodeBlock';
 
@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = await getAllPostFiles();
+  const files = await getPostFiles();
 
   const paths = files.map((file: string): any  => ({
     params: { slug: convertFileNameToSlugParts(file) }
