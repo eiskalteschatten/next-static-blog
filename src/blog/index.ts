@@ -116,20 +116,6 @@ export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[
 
 
 export const getMetaDataForCategoryPosts = async (categoryKey: string, count?: number): Promise<PostMetaData[]> => {
-  try {
-    const files = await getPostFiles(count);
-    const metaData: PostMetaData[] = [];
-
-    for (const file of files) {
-      const parsedPost = await getPost(file);
-      if (parsedPost.metaData.categories.includes(categoryKey)) {
-        metaData.push(parsedPost.metaData);
-      }
-    }
-
-    return metaData;
-  }
-  catch(error) {
-    console.error(error);
-  }
+  const allPosts = await getMetaDataForPosts(count);
+  return allPosts.filter((metaData: PostMetaData): boolean => metaData.categories.includes(categoryKey));
 };
