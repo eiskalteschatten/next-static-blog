@@ -106,10 +106,6 @@ export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[
   }
 };
 
-export const getAllPosts = async (count?: number): Promise<Post[]> => {
-  return [];
-};
-
 export const getMetaDataForCategoryPosts = async (categoryKey: string, count?: number): Promise<PostMetaData[]> => {
   const files = await getPostFiles(count);
   const metaData: PostMetaData[] = [];

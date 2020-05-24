@@ -9,7 +9,7 @@ import { getMetaDataForPosts, PostMetaData } from '../blog';
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const postMetaData = await getMetaDataForPosts(10);
+  const postMetaData = await getMetaDataForPosts();
 
   return {
     props: {
@@ -22,19 +22,19 @@ interface Props {
   postMetaData: PostMetaData[];
 }
 
-const Home: React.FC<Props> = ({ postMetaData }) => {
+const PostsPage: React.FC<Props> = ({ postMetaData }) => {
   return (
     <>
       <Head>
-        {useStadandardHeaderTags()}
+        {useStadandardHeaderTags('All Posts')}
       </Head>
 
-      <Link href='/posts' passHref>
-        <a>All Posts</a>
+      <Link href='/' passHref>
+        <a>Home</a>
       </Link>
 
       <div>
-        These are the latest 10 posts:
+        These are all of the posts:
       </div>
 
       {postMetaData.map((metaData: PostMetaData, index: number) => (
@@ -54,4 +54,4 @@ const Home: React.FC<Props> = ({ postMetaData }) => {
   );
 };
 
-export default Home;
+export default PostsPage;
