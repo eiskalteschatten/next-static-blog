@@ -56,6 +56,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postName = convertSlugToFileName(params.slug);
   const post = await getPost(postName);
 
+  if (!post) {
+    throw new Error(`Could not find a post for ${postName}!`);
+  }
+
   return {
     props: {
       post
@@ -72,7 +76,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true
+    fallback: false
   };
 };
 
