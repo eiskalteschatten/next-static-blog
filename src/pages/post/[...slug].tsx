@@ -43,6 +43,8 @@ interface Props {
 
 const PostPage: React.FC<Props> = ({ post }) => {
   const publishedDate = new Date(post.metaData.publishedDate);
+  const publishedMonth = ('0' + (publishedDate.getMonth()+1)).slice(-2);
+  const archivesLink = `/archives/${publishedDate.getFullYear()}/${publishedMonth}`;
 
   return (
     <>
@@ -61,7 +63,11 @@ const PostPage: React.FC<Props> = ({ post }) => {
       </h1>
 
       <div>
-        Published: {publishedDate.toLocaleDateString()} at {publishedDate.toLocaleTimeString()}<br />
+        Published: <Link href={archivesLink} passHref>
+          <a>
+            {publishedDate.toLocaleDateString()} at {publishedDate.toLocaleTimeString()}<br />
+          </a>
+        </Link>
         Author: {post.metaData.author}<br />
         Categories: {post.metaData.categories.map((category: string, index: number): any => (
           <span key={index}>

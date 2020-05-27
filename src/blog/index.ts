@@ -13,6 +13,7 @@ export interface PostMetaData {
   categories: string[];
   tags?: string[];
   publishedDate: string;
+  updatedAt: string;
   excerpt?: string;
   slug: string;
 }
@@ -122,4 +123,15 @@ export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[
 export const getMetaDataForCategoryPosts = async (categoryKey: string, count?: number): Promise<PostMetaData[]> => {
   const allPosts = await getMetaDataForPosts(count);
   return allPosts.filter((metaData: PostMetaData): boolean => metaData.categories.includes(categoryKey));
+};
+
+
+export const getMetaDataForArchivePosts = async (year: number, month: number, count?: number): Promise<PostMetaData[]> => {
+  const allPosts = await getMetaDataForPosts(count);
+  return allPosts.filter((metaData: PostMetaData): boolean =>  {
+    const publishedDate = new Date(metaData.publishedDate);
+    const pubMonth = publishedDate.getMonth() + 1;
+    const pubYear = publishedDate.getFullYear();
+    return pubMonth === month && pubYear === year;
+  });
 };
