@@ -74,8 +74,6 @@ export const getPost = async (postName: string): Promise<Post> => {
   try {
     const post = `${postsFolder}/${postName}/index.md`;
 
-console.log("@@@",post)
-
     await fs.promises.access(post);
 
     const data = await fs.promises.readFile(post, 'utf8');
