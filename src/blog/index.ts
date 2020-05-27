@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import YAML from 'yaml';
 
 const postsFolder = path.resolve(`${process.cwd()}/src/blog/posts`);
 

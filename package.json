@@ -18,8 +18,7 @@
     "react-syntax-highlighter": "^12.2.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "sass": "^1.26.5",
-    "yaml": "^1.10.0"
+    "sass": "^1.26.5"
   },
   "devDependencies": {
     "@types/node": "^13.13.9",
