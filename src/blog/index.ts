@@ -70,25 +70,30 @@ export const getPostFolders = async (count?: number): Promise<string[]> => {
 };
 
 
+export const getMetaDataForPost = async (postName: string): Promise<PostMetaData> => {
+  try {
+    const metaDataString = await fs.promises.readFile(`${postsFolder}/${postName}/meta.json`, 'utf8');
+    const metaData = JSON.parse(metaDataString);
+    metaData.slug = convertFolderNameToSlug(postName);
+    return metaData;
+  }
+  catch(error) {
+    console.error(error);
+  }
+};
+
+
 export const getPost = async (postName: string): Promise<Post> => {
   try {
     const post = `${postsFolder}/${postName}/index.md`;
-
     await fs.promises.access(post);
+    const body = await fs.promises.readFile(post, 'utf8');
 
-    const data = await fs.promises.readFile(post, 'utf8');
-    const parsedParts = data.split('---');
-    const parsedMetaData = YAML.parse(parsedParts[1]);
-
-    const metaData = {
-      ...parsedMetaData,
-      excerpt: parsedMetaData.excerpt?.trim(),
-      slug: convertFolderNameToSlug(postName)
-    };
+    const metaData = await getMetaDataForPost(postName);
 
     return {
       metaData,
-      body: parsedParts[2].trim()
+      body
     };
   }
   catch(error) {
@@ -103,8 +108,8 @@ export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[
     const metaData: PostMetaData[] = [];
 
     for (const folder of folders) {
-      const parsedPost = await getPost(folder);
-      metaData.push(parsedPost.metaData);
+      const parsedPost = await getMetaDataForPost(folder);
+      metaData.push(parsedPost);
     }
 
     return metaData;
