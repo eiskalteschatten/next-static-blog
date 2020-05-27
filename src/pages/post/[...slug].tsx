@@ -70,7 +70,10 @@ const PostPage: React.FC<Props> = ({ post }) => {
             {publishedDate.toLocaleDateString()} at {publishedDate.toLocaleTimeString()}<br />
           </a>
         </Link>
-        Author: <a href={author.url} target='_blank' rel='noreferrer'>{author.name}</a><br />
+        Author: <Link href={`/author/${post.metaData.author}`} passHref>
+          <a>{author.name}</a>
+        </Link>
+        <br />
         Categories: {post.metaData.categories.map((category: string, index: number): any => (
           <span key={index}>
             <Link href={`/category/${categories[category].slug}`} passHref>

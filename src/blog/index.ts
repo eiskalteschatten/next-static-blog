@@ -134,3 +134,9 @@ export const getMetaDataForArchivePosts = async (year: number, month: number, co
     return pubMonth === month && pubYear === year;
   });
 };
+
+
+export const getMetaDataForAuthorPosts = async (authorKey: string, count?: number): Promise<PostMetaData[]> => {
+  const allPosts = await getMetaDataForPosts(count);
+  return allPosts.filter((metaData: PostMetaData): boolean => metaData.author === authorKey);
+};
