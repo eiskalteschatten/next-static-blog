@@ -12,6 +12,7 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
   const [page, setPage] = useState<number>(1);
   const maxPosts = parseInt(process.env.NEXT_PUBLIC_MAX_POSTS_PER_PAGE);
   const offset = maxPosts * (page - 1);
+  const pageCount = Math.ceil(postMetaData.length / maxPosts);
 
   // Create a new post metadata object to splice from so that the passed prop (which is a reference)
   // isn't affected. Strange things happen otherwise.
@@ -43,6 +44,16 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
           No posts found!
         </div>
       )}
+
+      <div>
+        {Array.from({ length: pageCount }, (_, i) => i + 1).map((count: number) => (
+          <>
+            <Link href={`?page=${count}`} passHref key={count}>
+              <a>{count}</a>
+            </Link>&nbsp;|&nbsp;
+          </>
+        ))}
+      </div>
     </>
   );
 };
