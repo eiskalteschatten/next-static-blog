@@ -12,11 +12,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     throw new Error('Cannot determine the month and year!');
   }
 
-  const postMetaData = await getMetaDataForArchivePosts(Number(params.slug[0]), Number(params.slug[1]));
+  const year = Number(params.slug[0]);
+  const month = Number(params.slug[1]);
+  const postMetaData = await getMetaDataForArchivePosts(year, month);
 
   return {
     props: {
-      postMetaData
+      postMetaData,
+      year,
+      month
     }
   };
 };
@@ -38,14 +42,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 interface Props {
   postMetaData: PostMetaData[];
+  year: number;
+  month: number;
 }
 
-const ArchivesPage: React.FC<Props> = ({ postMetaData }) => {
+const ArchivesPage: React.FC<Props> = ({ postMetaData, year, month }) => {
+  const date = new Date();
+  date.setDate(1);
+  date.setMonth(month - 1);
+  const monthName = date.toLocaleString('en-US', { month: 'long' });
+
   return (
     <>
       <Head>
-        {useStadandardHeaderTags('Archives')}
+        {useStadandardHeaderTags(`Archives for ${monthName} ${year}`)}
       </Head>
+
+      <h1>
+        {monthName} {year}
+      </h1>
 
       <PostList postMetaData={postMetaData} />
 
