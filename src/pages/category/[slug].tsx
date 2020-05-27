@@ -57,7 +57,7 @@ const CategoryPage: React.FC<Props> = ({ category, postMetaData }) => {
         {category.name}
       </h1>
 
-      <PostList postMetaData={postMetaData} />
+      <PostList postMetaData={postMetaData} page={1} />
 
       <Link href='/' passHref>
         <a>Home</a>

@@ -62,7 +62,7 @@ const ArchivesPage: React.FC<Props> = ({ postMetaData, year, month }) => {
         {monthName} {year}
       </h1>
 
-      <PostList postMetaData={postMetaData} />
+      <PostList postMetaData={postMetaData} page={1} />
 
       <Link href='/' passHref>
         <a>Home</a>

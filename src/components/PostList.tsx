@@ -6,12 +6,21 @@ import { PostMetaData } from '../blog';
 
 interface Props {
   postMetaData: PostMetaData[];
+  page: number;
 }
 
-const PostList: React.FC<Props> = ({ postMetaData }) => {
+const PostList: React.FC<Props> = ({ postMetaData, page }) => {
+  const maxPosts = parseInt(process.env.NEXT_PUBLIC_MAX_POSTS_PER_PAGE);
+  const offset = maxPosts * (page - 1);
+
+  // Create a new post metadata object to splice from so that the passed prop (which is a reference)
+  // isn't affected. Strange things happen otherwise.
+  const newPostMetaData = Object.assign([], postMetaData);
+  const splicedData = newPostMetaData.splice(offset, offset + maxPosts);
+
   return (
     <>
-      {postMetaData ? postMetaData.map((metaData: PostMetaData, index: number) => (
+      {splicedData && splicedData.length > 0 ? splicedData.map((metaData: PostMetaData, index: number) => (
         <div key={index}>
           <Link href={`/post/${metaData.slug}`} passHref>
             <a>

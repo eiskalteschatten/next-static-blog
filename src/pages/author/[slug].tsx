@@ -57,7 +57,7 @@ const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
         {author.name}
       </h1>
 
-      <PostList postMetaData={postMetaData} />
+      <PostList postMetaData={postMetaData} page={1} />
 
       <Link href='/' passHref>
         <a>Home</a>
