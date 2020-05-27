@@ -5,7 +5,7 @@ import Head from 'next/head';
 import ReactMarkdown from 'react-markdown';
 
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
-import { getPostFiles, Post, getPost, convertFileNameToSlugParts, convertSlugToFileName } from '../../blog';
+import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '../../blog';
 import categories from '../../blog/categories';
 import CodeBlock from '../../components/CodeBlock';
 
@@ -14,7 +14,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     throw new Error(`Cannot determine the post slug for ${params.slug}!`);
   }
 
-  const postName = convertSlugToFileName(params.slug);
+  const postName = convertSlugToFolderName(params.slug);
   const post = await getPost(postName);
 
   return {
@@ -25,10 +25,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = await getPostFiles();
+  const files = await getPostFolders();
 
   const paths = files.map((file: string): any  => ({
-    params: { slug: convertFileNameToSlugParts(file) }
+    params: { slug: convertFolderNameToSlugParts(file) }
   }));
 
   return {

@@ -24,12 +24,12 @@ export interface Post {
 }
 
 
-export const convertFileNameToSlug = (fileName: string): string => {
-  fileName = path.parse(fileName).name;
-  const slugParts = fileName.split('_');
+export const convertFolderNameToSlug = (folderName: string): string => {
+  folderName = path.parse(folderName).name;
+  const slugParts = folderName.split('_');
 
   if (slugParts.length !== 2) {
-    throw new Error(`${fileName} is an invalid file name and should follow this pattern: '2020-05-24_example-post'.`);
+    throw new Error(`${folderName} is an invalid folder name and should follow this pattern: '2020-05-24_example-post'.`);
   }
 
   const date = slugParts[0].replace(/-/g, '/');
@@ -37,32 +37,32 @@ export const convertFileNameToSlug = (fileName: string): string => {
 };
 
 
-export const convertFileNameToSlugParts = (fileName: string): string[] => {
-  const slug = convertFileNameToSlug(fileName);
+export const convertFolderNameToSlugParts = (folderName: string): string[] => {
+  const slug = convertFolderNameToSlug(folderName);
   return slug.split('/');
 };
 
 
-export const convertSlugToFileName = (slugParts: string[]): string => {
+export const convertSlugToFolderName = (slugParts: string[]): string => {
   if (slugParts.length !== 4) {
     throw new Error(`${JSON.stringify(slugParts)} is an invalid slug and should follow this pattern: '2020/05/24/example-post'.`);
   }
 
-  return `${slugParts[0]}-${slugParts[1]}-${slugParts[2]}_${slugParts[3]}.md`;
+  return `${slugParts[0]}-${slugParts[1]}-${slugParts[2]}_${slugParts[3]}`;
 };
 
 
-export const getPostFiles = async (count?: number): Promise<string[]> => {
+export const getPostFolders = async (count?: number): Promise<string[]> => {
   try {
-    let files = await fs.promises.readdir(postsFolder);
-    files = files.filter((file: string): boolean => path.parse(file).ext === '.md');
-    files = files.reverse();
+    let folders = await fs.promises.readdir(postsFolder);
+    folders = folders.filter((folder: string): boolean => fs.lstatSync(path.resolve(postsFolder, folder)).isDirectory());
+    folders = folders.reverse();
 
     if (count) {
-      files = files.splice(0, count);
+      folders = folders.splice(0, count);
     }
 
-    return files;
+    return folders;
   }
   catch(error) {
     console.error(error);
@@ -72,7 +72,9 @@ export const getPostFiles = async (count?: number): Promise<string[]> => {
 
 export const getPost = async (postName: string): Promise<Post> => {
   try {
-    const post = `${postsFolder}/${postName}`;
+    const post = `${postsFolder}/${postName}/index.md`;
+
+console.log("@@@",post)
 
     await fs.promises.access(post);
 
@@ -83,7 +85,7 @@ export const getPost = async (postName: string): Promise<Post> => {
     const metaData = {
       ...parsedMetaData,
       excerpt: parsedMetaData.excerpt?.trim(),
-      slug: convertFileNameToSlug(postName)
+      slug: convertFolderNameToSlug(postName)
     };
 
     return {
@@ -99,11 +101,11 @@ export const getPost = async (postName: string): Promise<Post> => {
 
 export const getMetaDataForPosts = async (count?: number): Promise<PostMetaData[]> => {
   try {
-    const files = await getPostFiles(count);
+    const folders = await getPostFolders(count);
     const metaData: PostMetaData[] = [];
 
-    for (const file of files) {
-      const parsedPost = await getPost(file);
+    for (const folder of folders) {
+      const parsedPost = await getPost(folder);
       metaData.push(parsedPost.metaData);
     }
 
