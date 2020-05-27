@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -62,7 +62,7 @@ const ArchivesPage: React.FC<Props> = ({ postMetaData, year, month }) => {
         {monthName} {year}
       </h1>
 
-      <PostList postMetaData={postMetaData} page={1} />
+      <PostList postMetaData={postMetaData} />
 
       <Link href='/' passHref>
         <a>Home</a>

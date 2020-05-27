@@ -37,7 +37,7 @@ const PostsPage: React.FC<Props> = ({ postMetaData }) => {
         These are all of the posts:
       </div>
 
-      <PostList postMetaData={postMetaData} page={1} />
+      <PostList postMetaData={postMetaData} />
     </>
   );
 };

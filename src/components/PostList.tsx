@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 
@@ -6,10 +6,10 @@ import { PostMetaData } from '../blog';
 
 interface Props {
   postMetaData: PostMetaData[];
-  page: number;
 }
 
-const PostList: React.FC<Props> = ({ postMetaData, page }) => {
+const PostList: React.FC<Props> = ({ postMetaData }) => {
+  const [page, setPage] = useState<number>(1);
   const maxPosts = parseInt(process.env.NEXT_PUBLIC_MAX_POSTS_PER_PAGE);
   const offset = maxPosts * (page - 1);
 
@@ -17,6 +17,12 @@ const PostList: React.FC<Props> = ({ postMetaData, page }) => {
   // isn't affected. Strange things happen otherwise.
   const newPostMetaData = Object.assign([], postMetaData);
   const splicedData = newPostMetaData.splice(offset, offset + maxPosts);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = parseInt(urlParams.get('page')) || 1;
+    setPage(pageParam);
+  }, []);
 
   return (
     <>
