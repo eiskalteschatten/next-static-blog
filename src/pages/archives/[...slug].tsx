@@ -2,10 +2,10 @@ import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
-import ReactMarkdown from 'react-markdown';
 
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { PostMetaData, getMetaDataForArchivePosts, getPostFolders, convertFolderNameToSlugParts } from '../../blog';
+import PostList from '../../components/PostList';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (params.slug.length !== 2) {
@@ -47,27 +47,11 @@ const ArchivesPage: React.FC<Props> = ({ postMetaData }) => {
         {useStadandardHeaderTags('Archives')}
       </Head>
 
+      <PostList postMetaData={postMetaData} />
+
       <Link href='/' passHref>
         <a>Home</a>
       </Link>
-
-      <div>
-        These are all of the posts:
-      </div>
-
-      {postMetaData.map((metaData: PostMetaData, index: number) => (
-        <div key={index}>
-          <Link href={`/post/${metaData.slug}`} passHref>
-            <a>
-              <div>{metaData.title}</div>
-
-              {metaData.excerpt && (
-                <ReactMarkdown source={metaData.excerpt} />
-              )}
-            </a>
-          </Link>
-        </div>
-      ))}
     </>
   );
 };
