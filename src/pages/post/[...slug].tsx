@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '../../blog';
 import categories from '../../blog/categories';
+import authors from '../../blog/authors';
 import CodeBlock from '../../components/CodeBlock';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -45,6 +46,7 @@ const PostPage: React.FC<Props> = ({ post }) => {
   const publishedDate = new Date(post.metaData.publishedDate);
   const publishedMonth = ('0' + (publishedDate.getMonth()+1)).slice(-2);
   const archivesLink = `/archives/${publishedDate.getFullYear()}/${publishedMonth}`;
+  const author = authors[post.metaData.author];
 
   return (
     <>
@@ -68,7 +70,7 @@ const PostPage: React.FC<Props> = ({ post }) => {
             {publishedDate.toLocaleDateString()} at {publishedDate.toLocaleTimeString()}<br />
           </a>
         </Link>
-        Author: {post.metaData.author}<br />
+        Author: <a href={author.url} target='_blank' rel='noreferrer'>{author.name}</a><br />
         Categories: {post.metaData.categories.map((category: string, index: number): any => (
           <span key={index}>
             <Link href={`/category/${categories[category].slug}`} passHref>

@@ -1,8 +1,7 @@
 {
   "id": "second-post",
   "title": "Second Post",
-  "author": "Alex Seifert",
-  "authorLink": "https://www.alexseifert.com",
+  "author": "alexseifert",
   "titleImage": "hero.jpg",
   "description": "This is for the meta-description tag in the header for SEO.",
   "categories": ["news", "testCategory", "anotherCategory"],

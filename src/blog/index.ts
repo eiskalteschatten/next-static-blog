@@ -7,7 +7,6 @@ export interface PostMetaData {
   id: string;
   title: string;
   author: string;
-  authorLink?: string;
   titleImage?: string;
   description: string;
   categories: string[];
