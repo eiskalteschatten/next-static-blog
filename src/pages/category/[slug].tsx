@@ -9,8 +9,8 @@ import { PostMetaData, getMetaDataForCategoryPosts } from '../../blog';
 import categories, { Category } from '../../blog/categories';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let categoryKey;
-  let category;
+  let categoryKey: string;
+  let category: Category;
 
   for (const key in categories) {
     if (categories[key].slug === params.slug) {
