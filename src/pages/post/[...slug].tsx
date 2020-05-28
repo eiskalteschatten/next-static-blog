@@ -90,10 +90,6 @@ const PostPage: React.FC<Props> = ({ post }) => {
           renderers={{ code: CodeBlock }}
         />
       </div>
-
-      <Link href='/' passHref>
-        <a>Home</a>
-      </Link>
     </>
   );
 };

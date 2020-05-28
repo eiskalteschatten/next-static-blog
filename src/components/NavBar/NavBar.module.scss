@@ -1,0 +1,37 @@
+.navBar {
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  height: 75px;
+  padding: 0 30px;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.nav {
+  display: flex;
+  height: 100%;
+}
+
+.navItem {
+  height: 100%;
+  color: #000000;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    color: #000000;
+    background: darken(#ffffff, 5%);
+    text-decoration: none;
+  }
+
+  &:active {
+    background: darken(#ffffff, 10%);
+  }
+}

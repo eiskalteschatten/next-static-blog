@@ -29,10 +29,6 @@ const Home: React.FC<Props> = ({ postMetaData }) => {
         {useStadandardHeaderTags()}
       </Head>
 
-      <Link href='/posts' passHref>
-        <a>All Posts</a>
-      </Link>
-
       <div>
         These are the latest 10 posts:
       </div>

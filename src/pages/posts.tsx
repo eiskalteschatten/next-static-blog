@@ -1,6 +1,5 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
 import Head from 'next/head';
 
 import useStadandardHeaderTags from '../lib/useStandardHeaderTags';
@@ -28,10 +27,6 @@ const PostsPage: React.FC<Props> = ({ postMetaData }) => {
       <Head>
         {useStadandardHeaderTags('All Posts')}
       </Head>
-
-      <Link href='/' passHref>
-        <a>Home</a>
-      </Link>
 
       <div>
         These are all of the posts:

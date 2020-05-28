@@ -1,6 +1,5 @@
 import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import Link from 'next/link';
 import Head from 'next/head';
 
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
@@ -58,10 +57,6 @@ const CategoryPage: React.FC<Props> = ({ category, postMetaData }) => {
       </h1>
 
       <PostList postMetaData={postMetaData} />
-
-      <Link href='/' passHref>
-        <a>Home</a>
-      </Link>
     </>
   );
 };
