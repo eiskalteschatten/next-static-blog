@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import '../scss/styles.scss';
 
 import store from '../store';
-import MainLayout from '../components/MainLayout';
+import Layout from '../components/Layout';
 
 const App: any = ({ Component, pageProps }) => {
   return (
     <Provider store={store}>
-      <MainLayout>
+      <Layout>
         <Component {...pageProps} />
-      </MainLayout>
+      </Layout>
     </Provider>
   );
 };

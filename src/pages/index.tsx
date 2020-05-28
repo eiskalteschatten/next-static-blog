@@ -2,6 +2,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 import useStadandardHeaderTags from '../lib/useStandardHeaderTags';
@@ -24,7 +25,7 @@ interface Props {
 
 const Home: React.FC<Props> = ({ postMetaData }) => {
   return (
-    <>
+    <Container>
       <Head>
         {useStadandardHeaderTags()}
       </Head>
@@ -38,7 +39,7 @@ const Home: React.FC<Props> = ({ postMetaData }) => {
           <PostTile key={index} metaData={metaData} />
         ))}
       </Row>
-    </>
+    </Container>
   );
 };
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 
+import Container from 'react-bootstrap/Container';
+
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { PostMetaData, getMetaDataForAuthorPosts } from '../../blog';
 import authors, { Author } from '../../blog/authors';
@@ -47,7 +49,7 @@ interface Props {
 
 const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
   return (
-    <>
+    <Container>
       <Head>
         {useStadandardHeaderTags(author.name, author.bio)}
       </Head>
@@ -63,7 +65,7 @@ const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
       )}
 
       <PostList postMetaData={postMetaData} />
-    </>
+    </Container>
   );
 };
 

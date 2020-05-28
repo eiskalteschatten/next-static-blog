@@ -2,6 +2,8 @@ import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 
+import Container from 'react-bootstrap/Container';
+
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { PostMetaData, getMetaDataForCategoryPosts } from '../../blog';
 import categories, { Category } from '../../blog/categories';
@@ -47,7 +49,7 @@ interface Props {
 
 const CategoryPage: React.FC<Props> = ({ category, postMetaData }) => {
   return (
-    <>
+    <Container>
       <Head>
         {useStadandardHeaderTags(category.name, category.description)}
       </Head>
@@ -57,7 +59,7 @@ const CategoryPage: React.FC<Props> = ({ category, postMetaData }) => {
       </h1>
 
       <PostList postMetaData={postMetaData} />
-    </>
+    </Container>
   );
 };
 

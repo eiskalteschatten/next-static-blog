@@ -2,6 +2,8 @@ import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 
+import Container from 'react-bootstrap/Container';
+
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { PostMetaData, getMetaDataForArchivePosts, getPostFolders, convertFolderNameToSlugParts } from '../../blog';
 import PostList from '../../components/posts/PostList';
@@ -52,7 +54,7 @@ const ArchivesPage: React.FC<Props> = ({ postMetaData, year, month }) => {
   const monthName = date.toLocaleString('en-US', { month: 'long' });
 
   return (
-    <>
+    <Container>
       <Head>
         {useStadandardHeaderTags(`Archives for ${monthName} ${year}`)}
       </Head>
@@ -62,7 +64,7 @@ const ArchivesPage: React.FC<Props> = ({ postMetaData, year, month }) => {
       </h1>
 
       <PostList postMetaData={postMetaData} />
-    </>
+    </Container>
   );
 };
 

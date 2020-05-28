@@ -2,6 +2,8 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 
+import Container from 'react-bootstrap/Container';
+
 import useStadandardHeaderTags from '../lib/useStandardHeaderTags';
 import { getMetaDataForPosts, PostMetaData } from '../blog';
 import PostList from '../components/posts/PostList';
@@ -23,7 +25,7 @@ interface Props {
 
 const PostsPage: React.FC<Props> = ({ postMetaData }) => {
   return (
-    <>
+    <Container>
       <Head>
         {useStadandardHeaderTags('All Posts')}
       </Head>
@@ -33,7 +35,7 @@ const PostsPage: React.FC<Props> = ({ postMetaData }) => {
       </div>
 
       <PostList postMetaData={postMetaData} />
-    </>
+    </Container>
   );
 };
 
