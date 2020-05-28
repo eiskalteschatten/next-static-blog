@@ -4,10 +4,13 @@ import Head from 'next/head';
 
 import Container from 'react-bootstrap/Container';
 
+import styles from './AuthorPage.module.scss';
+
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { PostMetaData, getMetaDataForAuthorPosts } from '../../blog';
 import authors, { Author } from '../../blog/authors';
 import PostList from '../../components/posts/PostList';
+import Avatar from '../../components/Avatar';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let authorKey: string;
@@ -58,11 +61,30 @@ const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
         {author.name}
       </h1>
 
-      {author.bio && (
-        <div>
-          {author.bio}
-        </div>
+      {author.website && (
+        <a
+          href={author.website}
+          target='_blank'
+          rel='noreferrer'
+          className='btn btn-light btn-sm btn-small'
+        >
+          Website &#x2192;
+        </a>
       )}
+
+      <div className={styles.authorInfo}>
+        {author.avatar && (
+          <div className={styles.avatar}>
+            <Avatar src={author.avatar} alt={author.name} />
+          </div>
+        )}
+
+        {author.bio && (
+          <div>
+            {author.bio}
+          </div>
+        )}
+      </div>
 
       <PostList postMetaData={postMetaData} />
     </Container>

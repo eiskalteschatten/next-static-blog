@@ -9,7 +9,7 @@ import styles from './Post.module.scss';
 import categories from '../../../blog/categories';
 import { Post } from '../../../blog';
 import CodeBlock from '../../CodeBlock';
-import AuthorAvatar from '../../AuthorAvatar';
+import AuthorBlock from '../../AuthorBlock';
 
 interface Props {
   post: Post;
@@ -41,7 +41,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
         </div>
 
         <div className={styles.author}>
-          <AuthorAvatar authorKey={post.metaData.author} />
+          <AuthorBlock authorKey={post.metaData.author} />
         </div>
 
         <div className='mb-5'>
