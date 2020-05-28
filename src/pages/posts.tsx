@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import useStadandardHeaderTags from '../lib/useStandardHeaderTags';
 import { getMetaDataForPosts, PostMetaData } from '../blog';
-import PostList from '../components/PostList';
+import PostList from '../components/posts/PostList';
 
 
 export const getStaticProps: GetStaticProps = async () => {

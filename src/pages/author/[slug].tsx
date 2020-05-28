@@ -5,7 +5,7 @@ import Head from 'next/head';
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { PostMetaData, getMetaDataForAuthorPosts } from '../../blog';
 import authors, { Author } from '../../blog/authors';
-import PostList from '../../components/PostList';
+import PostList from '../../components/posts/PostList';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let authorKey: string;

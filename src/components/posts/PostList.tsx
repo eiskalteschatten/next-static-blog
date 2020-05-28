@@ -1,9 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
 import { useRouter } from 'next/router';
 
-import { PostMetaData } from '../blog';
+import Row from 'react-bootstrap/Row';
+
+import { PostMetaData } from '../../blog';
+import PostTile from './PostTile';
 
 interface Props {
   postMetaData: PostMetaData[];
@@ -23,23 +25,15 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
 
   return (
     <>
-      {splicedData && splicedData.length > 0 ? splicedData.map((metaData: PostMetaData, index: number) => (
-        <div key={index}>
-          <Link href={`/post/${metaData.slug}`} passHref>
-            <a>
-              <div>{metaData.title}</div>
-
-              {metaData.excerpt && (
-                <ReactMarkdown source={metaData.excerpt} />
-              )}
-            </a>
-          </Link>
-        </div>
-      )) : (
-        <div>
-          No posts found!
-        </div>
-      )}
+      <Row>
+        {splicedData && splicedData.length > 0 ? splicedData.map((metaData: PostMetaData, index: number) => (
+          <PostTile key={index} metaData={metaData} />
+        )) : (
+          <div>
+            No posts found!
+          </div>
+        )}
+      </Row>
 
       <div>
         {Array.from({ length: pageCount }, (_, i) => i + 1).map((count: number) => (
