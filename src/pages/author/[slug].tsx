@@ -56,6 +56,12 @@ const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
         {author.name}
       </h1>
 
+      {author.bio && (
+        <div>
+          {author.bio}
+        </div>
+      )}
+
       <PostList postMetaData={postMetaData} />
     </>
   );
