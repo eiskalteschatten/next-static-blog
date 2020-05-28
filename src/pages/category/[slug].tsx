@@ -51,7 +51,10 @@ const CategoryPage: React.FC<Props> = ({ category, postMetaData }) => {
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags(category.name, category.description)}
+        {useStadandardHeaderTags({
+          title: category.name,
+          description: category.description
+        })}
       </Head>
 
       <h1>

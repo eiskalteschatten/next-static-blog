@@ -42,7 +42,11 @@ const PostPage: React.FC<Props> = ({ post }) => {
   return (
     <>
       <Head>
-        {useStadandardHeaderTags(post.metaData.title, post.metaData.description)}
+        {useStadandardHeaderTags({
+          title: post.metaData.title,
+          description: post.metaData.description,
+          keywords: post.metaData.tags
+        })}
       </Head>
 
       <PostComponent post={post} />

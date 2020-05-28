@@ -14,7 +14,7 @@ const ErrorPage: React.FC<Props> = ({ statusCode }) => {
   return (
     <>
       <Head>
-        {useStandardHeaderTags(title)}
+        {useStandardHeaderTags({ title })}
       </Head>
       {statusCode === 404
         ? 'The page you are looking for could not be found.'

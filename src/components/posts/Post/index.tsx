@@ -57,10 +57,6 @@ const PostComponent: React.FC<Props> = ({ post }) => {
         <div>
           <Categories categoryKeys={post.metaData.categories} />
         </div>
-
-        {/* <div>
-          Tags: {JSON.stringify(post.metaData.tags)}
-        </div> */}
       </Container>
     </>
   );

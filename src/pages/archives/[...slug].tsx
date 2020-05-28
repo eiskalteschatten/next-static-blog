@@ -56,7 +56,7 @@ const ArchivesPage: React.FC<Props> = ({ postMetaData, year, month }) => {
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags(`Archives for ${monthName} ${year}`)}
+        {useStadandardHeaderTags({ title: `Archives for ${monthName} ${year}` })}
       </Head>
 
       <h1>

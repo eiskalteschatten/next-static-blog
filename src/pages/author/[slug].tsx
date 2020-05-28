@@ -54,7 +54,10 @@ const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags(author.name, author.bio)}
+        {useStadandardHeaderTags({
+          title: author.name,
+          description: author.bio
+        })}
       </Head>
 
       <h1>

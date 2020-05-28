@@ -27,7 +27,7 @@ const PostsPage: React.FC<Props> = ({ postMetaData }) => {
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags('All Posts')}
+        {useStadandardHeaderTags({ title: 'All Posts' })}
       </Head>
 
       <div>
