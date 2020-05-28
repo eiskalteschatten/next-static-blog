@@ -7,7 +7,7 @@ interface Options {
 }
 
 const useStandardHeaderTags = (options?: Options): any => {
-  const { title, description, keywords } = options;
+  const { title, description, keywords } = options || {};
   const defaultTitle = 'Next.js Static Blog';
   const finalDescription = description || 'A static blog';
 
