@@ -1,0 +1,23 @@
+.categories {
+  display: flex;
+  align-items: center;
+}
+
+.categoryPill {
+  border: 1px solid darken(#ffffff, 20%);
+  padding: 0 12px;
+  border-radius: 20px;
+  line-height: 30px;
+  font-size: .9em;
+  text-decoration: none;
+  color: #000000;
+  margin-right: 10px;
+
+  &:hover {
+    background: darken(#ffffff, 5%);
+  }
+
+  &:active {
+    background: darken(#ffffff, 10%);
+  }
+}

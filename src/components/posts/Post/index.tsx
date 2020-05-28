@@ -6,10 +6,10 @@ import Container from 'react-bootstrap/Container';
 
 import styles from './Post.module.scss';
 
-import categories from '../../../blog/categories';
 import { Post } from '../../../blog';
 import CodeBlock from '../../CodeBlock';
 import AuthorBlock from '../../AuthorBlock';
+import Categories from '../Categories';
 
 interface Props {
   post: Post;
@@ -52,15 +52,12 @@ const PostComponent: React.FC<Props> = ({ post }) => {
         </div>
 
         <div>
-          Categories: {post.metaData.categories.map((category: string, index: number): any => (
-            <span key={index}>
-              <Link href={`/category/${categories[category].slug}`} passHref>
-                <a>{categories[category].name}</a>
-              </Link>,&nbsp;
-            </span>
-          ))}<br />
-          Tags: {JSON.stringify(post.metaData.tags)}
+          <Categories categoryKeys={post.metaData.categories} />
         </div>
+
+        {/* <div>
+          Tags: {JSON.stringify(post.metaData.tags)}
+        </div> */}
       </Container>
     </>
   );
