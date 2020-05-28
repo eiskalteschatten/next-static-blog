@@ -1,11 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import clsx from 'clsx';
 
 import Row from 'react-bootstrap/Row';
 
-import { PostMetaData } from '../../blog';
-import PostTile from './PostTile';
+import styles from './PostList.module.scss';
+
+import { PostMetaData } from '../../../blog';
+import PostTile from '../PostTile';
 
 interface Props {
   postMetaData: PostMetaData[];
@@ -23,6 +26,8 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
   const newPostMetaData = Object.assign([], postMetaData);
   const splicedData = newPostMetaData.splice(offset, offset + maxPosts);
 
+  // const handlePaginationClick = ()
+
   return (
     <>
       <Row>
@@ -35,12 +40,20 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
         )}
       </Row>
 
-      <div>
+      <div className={styles.pagination}>
+
         {Array.from({ length: pageCount }, (_, i) => i + 1).map((count: number) => (
           <span key={count}>
             <Link href={`?page=${count}`} passHref>
-              <a>{count}</a>
-            </Link>&nbsp;|&nbsp;
+              <a
+                className={clsx({
+                  [styles.link]: true,
+                  [styles.active]: page === count
+                })}
+              >
+                {count}
+              </a>
+            </Link>
           </span>
         ))}
       </div>

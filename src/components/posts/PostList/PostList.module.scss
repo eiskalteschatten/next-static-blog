@@ -1,0 +1,25 @@
+.pagination {
+  text-align: center;
+
+  .link {
+    display: inline-block;
+    padding: 5px 15px;
+    border-bottom: 1px solid #000000;
+    margin: 0 5px;
+    border-radius: 2px;
+
+    &:hover {
+      text-decoration: none;
+      background: darken(#ffffff, 5%);
+    }
+
+    &:active {
+      background: darken(#ffffff, 10%);
+    }
+
+    &.active {
+      background: darken(#ffffff, 2%);
+      border-bottom: 2px solid #000000;
+    }
+  }
+}
