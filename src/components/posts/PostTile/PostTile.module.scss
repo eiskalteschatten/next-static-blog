@@ -6,12 +6,12 @@
   padding: 15px 35px;
   display: block;
   color: #000000;
+  text-decoration: none;
   transition: box-shadow 200ms;
   will-change: box-shadow;
 
   &:hover {
     color: #000000;
-    text-decoration: none;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   }

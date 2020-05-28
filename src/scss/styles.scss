@@ -2,6 +2,9 @@ $theme-colors: (
   "primary": #193a83
 );
 
+$link-decoration: underline;
+$link-hover-decoration: none;
+
 // @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -14,6 +17,7 @@ $theme-colors: (
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/buttons";
 
 
 #nprogress .bar {
