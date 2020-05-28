@@ -2,7 +2,7 @@
   "id": "second-post",
   "title": "Second Post",
   "author": "alexseifert",
-  "titleImage": "hero.jpg",
+  "titleImage": "/posts/2020-06-25_second-post/titleImage.svg",
   "description": "This is for the meta-description tag in the header for SEO.",
   "categories": ["news", "testCategory", "anotherCategory"],
   "tags": ["news tag", "another tag"],
