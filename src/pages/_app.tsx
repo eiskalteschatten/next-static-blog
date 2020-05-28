@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
+import 'nprogress/nprogress.css';
 import '../scss/styles.scss';
 
 import store from '../store';
