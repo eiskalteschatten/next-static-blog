@@ -7,9 +7,9 @@
     border-bottom: 1px solid #000000;
     margin: 0 5px;
     border-radius: 2px;
+    text-decoration: none;
 
     &:hover {
-      text-decoration: none;
       background: darken(#ffffff, 5%);
     }
 
