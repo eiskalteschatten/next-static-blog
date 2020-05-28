@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 
 import NavBar from './NavBar';
+import Footer from './Footer';
 
 NProgress.configure({
   showSpinner: false
@@ -35,6 +36,8 @@ const Layout: React.FC<Props> = ({ children }) => {
       <NavBar />
 
       {children}
+
+      <Footer />
     </>
   );
 };
