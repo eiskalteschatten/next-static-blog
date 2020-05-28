@@ -1,15 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
+import { useRouter } from 'next/router';
 
 import { PostMetaData } from '../blog';
 
 interface Props {
   postMetaData: PostMetaData[];
-  page: number;
 }
 
-const PostList: React.FC<Props> = ({ postMetaData, page }) => {
+const PostList: React.FC<Props> = ({ postMetaData }) => {
+  const router = useRouter();
+  const page = Number(router.query.page) || 1;
   const maxPosts = parseInt(process.env.NEXT_PUBLIC_MAX_POSTS_PER_PAGE);
   const offset = maxPosts * (page - 1);
   const pageCount = Math.ceil(postMetaData.length / maxPosts);

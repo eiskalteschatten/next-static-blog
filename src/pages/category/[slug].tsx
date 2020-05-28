@@ -25,8 +25,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       category,
-      postMetaData,
-      page: params.page || 1
+      postMetaData
     }
   };
 };
@@ -45,10 +44,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 interface Props {
   category: Category;
   postMetaData: PostMetaData[];
-  page: number;
 }
 
-const CategoryPage: React.FC<Props> = ({ category, postMetaData, page }) => {
+const CategoryPage: React.FC<Props> = ({ category, postMetaData }) => {
   return (
     <>
       <Head>
@@ -59,7 +57,7 @@ const CategoryPage: React.FC<Props> = ({ category, postMetaData, page }) => {
         {category.name}
       </h1>
 
-      <PostList postMetaData={postMetaData} page={page} />
+      <PostList postMetaData={postMetaData} />
 
       <Link href='/' passHref>
         <a>Home</a>
