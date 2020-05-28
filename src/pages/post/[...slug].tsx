@@ -1,10 +1,14 @@
 import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
+import { useAmp } from 'next/amp';
 
 import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
 import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '../../blog';
 import PostComponent from '../../components/posts/Post';
+import AmpPost from '../../components/posts/AmpPost';
+
+export const config = { amp: 'hybrid' };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!Array.isArray(params.slug)) {
@@ -39,6 +43,8 @@ interface Props {
 }
 
 const PostPage: React.FC<Props> = ({ post }) => {
+  const isAmp = useAmp();
+
   return (
     <>
       <Head>
@@ -47,9 +53,17 @@ const PostPage: React.FC<Props> = ({ post }) => {
           description: post.metaData.description,
           keywords: post.metaData.tags
         })}
+
+        {post.metaData.titleImage && (
+          <link rel='preload' href={post.metaData.titleImage} as='image' />
+        )}
       </Head>
 
-      <PostComponent post={post} />
+      {isAmp ? (
+        <AmpPost post={post} />
+      ) : (
+        <PostComponent post={post} />
+      )}
     </>
   );
 };
