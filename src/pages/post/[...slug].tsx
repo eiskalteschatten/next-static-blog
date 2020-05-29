@@ -57,6 +57,14 @@ const PostPage: React.FC<Props> = ({ post }) => {
         {post.metaData.titleImage && (
           <link rel='preload' href={post.metaData.titleImage} as='image' />
         )}
+
+        {isAmp && (
+          <style jsx global>{`
+            body {
+              background: red;
+            }
+          `}</style>
+        )}
       </Head>
 
       {isAmp ? (
