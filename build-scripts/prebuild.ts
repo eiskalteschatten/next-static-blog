@@ -1,0 +1,2 @@
+import './buildRssFeed';
+import './buildSitemap';

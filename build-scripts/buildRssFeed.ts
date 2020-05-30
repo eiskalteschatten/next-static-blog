@@ -24,11 +24,11 @@ const feed = new RSS({
 
 console.log('Building the RSS feed...');
 
-let folders = fs.readdirSync(postsFolder);
-folders = folders.filter(folder => fs.lstatSync(path.resolve(postsFolder, folder)).isDirectory());
-folders = folders.reverse();
+let postFolders = fs.readdirSync(postsFolder);
+postFolders = postFolders.filter(folder => fs.lstatSync(path.resolve(postsFolder, folder)).isDirectory());
+postFolders = postFolders.reverse();
 
-for (const folder of folders) {
+for (const folder of postFolders) {
   const folderPath = path.resolve(postsFolder, folder);
 
   const metaDataString = fs.readFileSync(`${folderPath}/meta.json`, 'utf8');
@@ -55,4 +55,4 @@ const writeFile = path.resolve(process.cwd(), 'public/feed.xml');
 
 fs.writeFileSync(writeFile, xml);
 
-console.log(`RSS feed saved to ${writeFile}`);
+console.log(`RSS feed was saved to ${writeFile}`);

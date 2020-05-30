@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
-    "prebuild": "TS_NODE_PROJECT=tsconfig.build.json ts-node ./build-scripts/buildRssFeed.ts",
+    "prebuild": "TS_NODE_PROJECT=tsconfig.build.json ts-node ./build-scripts/prebuild.ts",
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "eslint './**/*.{tsx,ts,js}'"
