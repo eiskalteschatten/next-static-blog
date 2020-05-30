@@ -22,6 +22,8 @@ const feed = new RSS({
   pubDate: new Date().toISOString()
 });
 
+console.log('Building the RSS feed...');
+
 let folders = fs.readdirSync(postsFolder);
 folders = folders.filter(folder => fs.lstatSync(path.resolve(postsFolder, folder)).isDirectory());
 folders = folders.reverse();
@@ -52,3 +54,5 @@ const xml = feed.xml();
 const writeFile = path.resolve(process.cwd(), 'public/feed.xml');
 
 fs.writeFileSync(writeFile, xml);
+
+console.log(`RSS feed saved to ${writeFile}`);
