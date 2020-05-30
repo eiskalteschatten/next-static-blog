@@ -44,7 +44,7 @@ for (const folder of folders) {
     categories: metaData.categories.map((key: string): string => categories[key].name),
     author: authors[metaData.author].name,
     date: metaData.publishedDate
-});
+  });
 }
 
 
