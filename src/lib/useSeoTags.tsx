@@ -16,7 +16,7 @@ interface Options {
   authorLastName?: string;
 }
 
-const useStandardHeaderTags = (options?: Options): any => {
+const useSeoTags = (options?: Options): any => {
   const router = useRouter();
   const { title, description, keywords, pageType, publishedDate, updatedAt, image, author, authorFirstName, authorLastName } = options || {};
   const finalDescription = description || siteSettings.siteDescription;
@@ -73,4 +73,4 @@ const useStandardHeaderTags = (options?: Options): any => {
   );
 };
 
-export default useStandardHeaderTags;
+export default useSeoTags;
