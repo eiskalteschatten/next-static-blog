@@ -11,7 +11,7 @@ interface Options {
 
 const useStandardHeaderTags = (options?: Options): any => {
   const { title, description, keywords } = options || {};
-  const finalDescription = description || 'A static blog';
+  const finalDescription = description || siteSettings.siteDescription;
   const router = useRouter();
 
   return (
