@@ -2,7 +2,7 @@ import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 
-import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSeoTags from '~/lib/useSeoTags';
 import useSchemaOrg from '~/lib/useSchemaOrg';
 import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '~/blog';
 import categories from '~/blog/categories';
@@ -45,7 +45,7 @@ const PostPage: React.FC<Props> = ({ post }) => {
   return (
     <>
       <Head>
-        {useStadandardHeaderTags({
+        {useSeoTags({
           title: post.metaData.title,
           description: post.metaData.description,
           keywords: post.metaData.tags,

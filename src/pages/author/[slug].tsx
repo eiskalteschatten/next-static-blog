@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 
 import styles from './AuthorPage.module.scss';
 
-import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSeoTags from '~/lib/useSeoTags';
 import useSchemaOrg from '~/lib/useSchemaOrg';
 import { PostMetaData, getMetaDataForAuthorPosts } from '~/blog';
 import authors, { Author } from '~/blog/authors';
@@ -55,7 +55,7 @@ const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags({
+        {useSeoTags({
           title: author.name,
           description: author.bio,
           pageType: 'profile',
