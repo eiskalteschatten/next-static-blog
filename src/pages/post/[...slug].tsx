@@ -53,8 +53,6 @@ const PostPage: React.FC<Props> = ({ post, slug }) => {
         {post.metaData.titleImage && (
           <link rel='preload' href={post.metaData.titleImage} as='image' />
         )}
-
-        <link rel='amphtml' href={`/post/amp/${slug}`} />
       </Head>
 
       <PostComponent post={post} />
