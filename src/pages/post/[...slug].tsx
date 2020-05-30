@@ -16,8 +16,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      post,
-      slug: params.slug.join('/')
+      post
     }
   };
 };
@@ -37,10 +36,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 interface Props {
   post: Post;
-  slug: string;
 }
 
-const PostPage: React.FC<Props> = ({ post, slug }) => {
+const PostPage: React.FC<Props> = ({ post }) => {
   return (
     <>
       <Head>
