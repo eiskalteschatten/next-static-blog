@@ -3,9 +3,10 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 
 import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
-import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '~/blog';
-import PostComponent from '~/components/posts/Post';
 import useSchemaOrg from '~/lib/useSchemaOrg';
+import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '~/blog';
+import categories from '~/blog/categories';
+import PostComponent from '~/components/posts/Post';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!Array.isArray(params.slug)) {
@@ -57,6 +58,14 @@ const PostPage: React.FC<Props> = ({ post }) => {
           webpage: {
             pageTitle: post.metaData.title,
             pageDescription: post.metaData.description
+          },
+          article: {
+            titleImage: post.metaData.titleImage,
+            headline: post.metaData.title,
+            datePublished: post.metaData.publishedDate,
+            dateModified: post.metaData.updatedAt,
+            keywords: post.metaData.tags.join(','),
+            articleSection: post.metaData.categories.map((key: string): string => categories[key].name).join(',')
           }
         })}
       </Head>

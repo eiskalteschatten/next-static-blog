@@ -6,7 +6,9 @@ import {
   WebSite,
   WebPage,
   CollectionPage,
-  ProfilePage
+  ProfilePage,
+  Article,
+  ImageObject
 } from 'schema-dts';
 
 import siteSettings from '~/siteSettings';
@@ -21,6 +23,15 @@ interface Options {
 
   profilePage?: {
     name: string;
+  };
+
+  article?: {
+    titleImage?: string;
+    headline: string;
+    datePublished: string;
+    dateModified: string;
+    keywords: string;
+    articleSection: string;
   };
 }
 
@@ -95,11 +106,11 @@ const useSchemaOrg = (options?: Options): any => {
   if (options?.collectionPage) {
     const collectionPage: CollectionPage = {
       '@type': 'CollectionPage',
-      '@id':  `${url}/#webpage`,
+      '@id': `${url}/#webpage`,
       url,
       name,
       isPartOf: {
-        '@id':  `${siteSettings.siteUrl}/#website`
+        '@id': `${siteSettings.siteUrl}/#website`
       },
       inLanguage: siteSettings.siteLanguage
     };
@@ -110,11 +121,11 @@ const useSchemaOrg = (options?: Options): any => {
   if (options?.profilePage) {
     const profilePage: ProfilePage = {
       '@type': 'ProfilePage',
-      '@id':  `${url}/#webpage`,
+      '@id': `${url}/#webpage`,
       url,
       name: `${options.profilePage.name}`,
       isPartOf: {
-        '@id':  `${siteSettings.siteUrl}/#website`
+        '@id': `${siteSettings.siteUrl}/#website`
       },
       inLanguage: siteSettings.siteLanguage
     };
@@ -122,11 +133,55 @@ const useSchemaOrg = (options?: Options): any => {
     schema['@graph'].push(profilePage);
   }
 
+  if (options?.article) {
+    if (options.article.titleImage) {
+      const imageObject: ImageObject = {
+        '@type': 'ImageObject',
+        '@id': `${url}/#primaryimage`,
+        url: `${siteSettings.siteUrl}${options.article.titleImage}`,
+        inLanguage: siteSettings.siteLanguage
+      };
+
+      schema['@graph'].push(imageObject);
+    }
+
+    const { headline, datePublished, dateModified, keywords, articleSection } = options.article;
+
+    const article: Article = {
+      '@type': 'Article',
+      '@id': `${url}/#article`,
+      isPartOf: {
+        '@id': `${url}/#webpage`
+      },
+      author: {
+        '@id': `${siteSettings.siteUrl}/#/person`
+      },
+      headline,
+      datePublished,
+      dateModified,
+      commentCount: 0,
+      mainEntityOfPage: {
+        '@id': `${url}/#webpage`
+      },
+      publisher: {
+        '@id': `${siteSettings.siteUrl}/#/person`
+      },
+      image: {
+        '@id': `${url}/#primaryimage`
+      },
+      keywords,
+      articleSection,
+      inLanguage: siteSettings.siteLanguage
+    };
+
+    schema['@graph'].push(article);
+  }
+
   return (
     <script
       type='application/ld+json'
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(schema, null,2)
+        __html: JSON.stringify(schema, null, 2)
       }}
     />
   );
