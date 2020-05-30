@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import styles from './AuthorPage.module.scss';
 
 import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSchemaOrg from '~/lib/useSchemaOrg';
 import { PostMetaData, getMetaDataForAuthorPosts } from '~/blog';
 import authors, { Author } from '~/blog/authors';
 import PostList from '~/components/posts/PostList';
@@ -57,6 +58,15 @@ const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
         {useStadandardHeaderTags({
           title: author.name,
           description: author.bio
+        })}
+        {useSchemaOrg({
+          webpage: {
+            pageTitle: author.name,
+            pageDescription: author.bio
+          },
+          profilePage: {
+            name: author.name
+          }
         })}
       </Head>
 

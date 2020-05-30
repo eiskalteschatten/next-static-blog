@@ -5,7 +5,8 @@ import {
   Person,
   WebSite,
   WebPage,
-  CollectionPage
+  CollectionPage,
+  ProfilePage
 } from 'schema-dts';
 
 import siteSettings from '~/siteSettings';
@@ -15,13 +16,17 @@ interface Options {
     pageTitle: string;
     pageDescription?: string;
   };
+
   collectionPage?: boolean;
+
+  profilePage?: {
+    name: string;
+  };
 }
 
 const useSchemaOrg = (options?: Options): any => {
   const router = useRouter();
   const { pageTitle, pageDescription } = options?.webpage || {};
-  // const { pageTitle, pageDescription } = options?.collectionPage || {};
 
   const name = options?.webpage ? `${pageTitle} - ${siteSettings.siteTitle}` : siteSettings.siteTitle;
   const url = `${siteSettings.siteUrl}${router.asPath}`;
@@ -100,6 +105,21 @@ const useSchemaOrg = (options?: Options): any => {
     };
 
     schema['@graph'].push(collectionPage);
+  }
+
+  if (options?.profilePage) {
+    const profilePage: ProfilePage = {
+      '@type': 'ProfilePage',
+      '@id':  `${url}/#webpage`,
+      url,
+      name: `${options.profilePage.name}`,
+      isPartOf: {
+        '@id':  `${siteSettings.siteUrl}/#website`
+      },
+      inLanguage: siteSettings.siteLanguage
+    };
+
+    schema['@graph'].push(profilePage);
   }
 
   return (
