@@ -17,7 +17,7 @@ class Document extends NextDocument {
 
           <link rel='icon' type='image/x-icon' href='/favicon.png' />
 
-          <link rel='alternate' type='application/rss+xml' title='RSS Feed' href={`${siteSettings.siteUrl}/feed/`} />
+          <link rel='alternate' type='application/rss+xml' title='RSS Feed' href={`${siteSettings.siteUrl}/feed.xml`} />
         </Head>
         <body>
           <Main />
