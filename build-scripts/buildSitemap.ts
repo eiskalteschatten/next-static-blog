@@ -86,7 +86,6 @@ const scanPages = (folder: string): void => {
       }
     }
   }
-
 };
 
 scanPages(pagesFolder);
