@@ -57,7 +57,10 @@ const AuthorPage: React.FC<Props> = ({ author, postMetaData }) => {
       <Head>
         {useStadandardHeaderTags({
           title: author.name,
-          description: author.bio
+          description: author.bio,
+          pageType: 'profile',
+          authorFirstName: author.firstName,
+          authorLastName: author.lastName
         })}
         {useSchemaOrg({
           webpage: {

@@ -6,6 +6,7 @@ import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
 import useSchemaOrg from '~/lib/useSchemaOrg';
 import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '~/blog';
 import categories from '~/blog/categories';
+import authors from '~/blog/authors';
 import PostComponent from '~/components/posts/Post';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -47,7 +48,12 @@ const PostPage: React.FC<Props> = ({ post }) => {
         {useStadandardHeaderTags({
           title: post.metaData.title,
           description: post.metaData.description,
-          keywords: post.metaData.tags
+          keywords: post.metaData.tags,
+          pageType: 'article',
+          publishedDate: post.metaData.publishedDate,
+          updatedAt: post.metaData.updatedAt,
+          author: authors[post.metaData.author].name,
+          image: post.metaData.titleImage
         })}
 
         {post.metaData.titleImage && (
