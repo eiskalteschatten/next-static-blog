@@ -1,7 +1,7 @@
 import React from 'react';
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
 
-import siteSettings from '../siteSettings';
+import siteSettings from '~/siteSettings';
 
 class Document extends NextDocument {
   render(): React.ReactElement {

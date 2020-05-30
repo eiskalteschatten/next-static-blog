@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 
 import styles from './PostList.module.scss';
 
-import { PostMetaData } from '../../../blog';
+import { PostMetaData } from '~/blog';
 import PostTile from '../PostTile';
 
 interface Props {

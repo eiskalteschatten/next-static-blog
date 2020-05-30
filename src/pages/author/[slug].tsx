@@ -6,11 +6,11 @@ import Container from 'react-bootstrap/Container';
 
 import styles from './AuthorPage.module.scss';
 
-import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
-import { PostMetaData, getMetaDataForAuthorPosts } from '../../blog';
-import authors, { Author } from '../../blog/authors';
-import PostList from '../../components/posts/PostList';
-import Avatar from '../../components/Avatar';
+import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import { PostMetaData, getMetaDataForAuthorPosts } from '~/blog';
+import authors, { Author } from '~/blog/authors';
+import PostList from '~/components/posts/PostList';
+import Avatar from '~/components/Avatar';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let authorKey: string;

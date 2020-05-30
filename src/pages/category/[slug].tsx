@@ -4,10 +4,10 @@ import Head from 'next/head';
 
 import Container from 'react-bootstrap/Container';
 
-import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
-import { PostMetaData, getMetaDataForCategoryPosts } from '../../blog';
-import categories, { Category } from '../../blog/categories';
-import PostList from '../../components/posts/PostList';
+import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import { PostMetaData, getMetaDataForCategoryPosts } from '~/blog';
+import categories, { Category } from '~/blog/categories';
+import PostList from '~/components/posts/PostList';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let categoryKey: string;

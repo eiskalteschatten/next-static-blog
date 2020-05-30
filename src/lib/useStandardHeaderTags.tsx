@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import siteSettings from '../siteSettings';
+import siteSettings from '~/siteSettings';
 
 interface Options {
   title?: string;

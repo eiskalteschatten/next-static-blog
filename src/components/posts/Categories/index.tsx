@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import styles from './Categories.module.scss';
 
-import categories from '../../../blog/categories';
+import categories from '~/blog/categories';
 
 interface Props {
   categoryKeys: string[];

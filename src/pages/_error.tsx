@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
 
-import useStandardHeaderTags from '../lib/useStandardHeaderTags';
+import useStandardHeaderTags from '~/lib/useStandardHeaderTags';
 
 interface Props {
   statusCode: number;

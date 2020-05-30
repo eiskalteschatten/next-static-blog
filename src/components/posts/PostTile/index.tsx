@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 
 import styles from './PostTile.module.scss';
 
-import { PostMetaData } from '../../../blog';
+import { PostMetaData } from '~/blog';
 
 interface Props {
   metaData: PostMetaData;

@@ -4,9 +4,9 @@ import Head from 'next/head';
 
 import Container from 'react-bootstrap/Container';
 
-import useStadandardHeaderTags from '../lib/useStandardHeaderTags';
-import { getMetaDataForPosts, PostMetaData } from '../blog';
-import PostList from '../components/posts/PostList';
+import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import { getMetaDataForPosts, PostMetaData } from '~/blog';
+import PostList from '~/components/posts/PostList';
 
 
 export const getStaticProps: GetStaticProps = async () => {

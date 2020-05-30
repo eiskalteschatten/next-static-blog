@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from './AuthorBlock.module.scss';
 
 import Avatar from '../Avatar';
-import authors from '../../blog/authors';
+import authors from '~/blog/authors';
 
 interface Props {
   authorKey: string;
