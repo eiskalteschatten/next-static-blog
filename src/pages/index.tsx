@@ -5,9 +5,10 @@ import Head from 'next/head';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import useStadandardHeaderTags from '../lib/useStandardHeaderTags';
-import { getMetaDataForPosts, PostMetaData } from '../blog';
-import PostTile from '../components/posts/PostTile';
+import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSchemaOrg from '~/lib/useSchemaOrg';
+import { getMetaDataForPosts, PostMetaData } from '~/blog';
+import PostTile from '~/components/posts/PostTile';
 
 export const getStaticProps: GetStaticProps = async () => {
   const postMetaData = await getMetaDataForPosts(10);
@@ -28,6 +29,7 @@ const Home: React.FC<Props> = ({ postMetaData }) => {
     <Container>
       <Head>
         {useStadandardHeaderTags()}
+        {useSchemaOrg()}
       </Head>
 
       <div>
