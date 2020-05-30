@@ -8,9 +8,11 @@
     margin: 0 5px;
     border-radius: 2px;
     text-decoration: none;
+    color: #000000;
 
     &:hover {
       background: darken(#ffffff, 5%);
+      color: #000000;
     }
 
     &:active {
