@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import Container from 'react-bootstrap/Container';
 
-import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSeoTags from '~/lib/useSeoTags';
 import useSchemaOrg from '~/lib/useSchemaOrg';
 import { getMetaDataForPosts, PostMetaData } from '~/blog';
 import PostList from '~/components/posts/PostList';
@@ -30,7 +30,7 @@ const PostsPage: React.FC<Props> = ({ postMetaData }) => {
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags({ title })}
+        {useSeoTags({ title })}
         {useSchemaOrg({
           webpage: {
             pageTitle: title

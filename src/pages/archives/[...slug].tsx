@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import Container from 'react-bootstrap/Container';
 
-import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSeoTags from '~/lib/useSeoTags';
 import useSchemaOrg from '~/lib/useSchemaOrg';
 import { PostMetaData, getMetaDataForArchivePosts, getPostFolders, convertFolderNameToSlugParts } from '~/blog';
 import PostList from '~/components/posts/PostList';
@@ -58,7 +58,7 @@ const ArchivesPage: React.FC<Props> = ({ postMetaData, year, month }) => {
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags({ title })}
+        {useSeoTags({ title })}
         {useSchemaOrg({
           webpage: {
             pageTitle: title

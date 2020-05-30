@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import Container from 'react-bootstrap/Container';
 
-import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSeoTags from '~/lib/useSeoTags';
 import useSchemaOrg from '~/lib/useSchemaOrg';
 import { PostMetaData, getMetaDataForCategoryPosts } from '~/blog';
 import categories, { Category } from '~/blog/categories';
@@ -52,7 +52,7 @@ const CategoryPage: React.FC<Props> = ({ category, postMetaData }) => {
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags({
+        {useSeoTags({
           title: category.name,
           description: category.description
         })}

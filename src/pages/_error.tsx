@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
 
-import useStandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSeoTags from '~/lib/useSeoTags';
 
 interface Props {
   statusCode: number;
@@ -14,7 +14,7 @@ const ErrorPage: React.FC<Props> = ({ statusCode }) => {
   return (
     <>
       <Head>
-        {useStandardHeaderTags({ title })}
+        {useSeoTags({ title })}
       </Head>
       {statusCode === 404
         ? 'The page you are looking for could not be found.'
