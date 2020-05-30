@@ -18,6 +18,10 @@ const NavBar: React.FC = () => {
         <Link href='/posts' passHref>
           <a className={styles.navItem}>All Posts</a>
         </Link>
+
+        <Link href='/feed.xml' passHref>
+          <a className={styles.navItem}>RSS Feed</a>
+        </Link>
       </div>
     </div>
   );

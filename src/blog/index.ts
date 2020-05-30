@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const postsFolder = path.resolve(`${process.cwd()}/src/blog/posts`);
+const postsFolder = path.resolve(process.cwd(), 'src/blog/posts');
 
 export interface PostMetaData {
   id: string;
