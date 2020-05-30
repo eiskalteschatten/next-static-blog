@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Container from 'react-bootstrap/Container';
 
 import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSchemaOrg from '~/lib/useSchemaOrg';
 import { PostMetaData, getMetaDataForArchivePosts, getPostFolders, convertFolderNameToSlugParts } from '~/blog';
 import PostList from '~/components/posts/PostList';
 
@@ -52,11 +53,18 @@ const ArchivesPage: React.FC<Props> = ({ postMetaData, year, month }) => {
   date.setDate(1);
   date.setMonth(month - 1);
   const monthName = date.toLocaleString('en-US', { month: 'long' });
+  const title = `Archives for ${monthName} ${year}`;
 
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags({ title: `Archives for ${monthName} ${year}` })}
+        {useStadandardHeaderTags({ title })}
+        {useSchemaOrg({
+          webpage: {
+            pageTitle: title
+          },
+          collectionPage: true
+        })}
       </Head>
 
       <h1>

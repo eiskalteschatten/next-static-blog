@@ -2,9 +2,10 @@ import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 
-import useStadandardHeaderTags from '../../lib/useStandardHeaderTags';
-import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '../../blog';
-import PostComponent from '../../components/posts/Post';
+import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import { getPostFolders, Post, getPost, convertFolderNameToSlugParts, convertSlugToFolderName } from '~/blog';
+import PostComponent from '~/components/posts/Post';
+import useSchemaOrg from '~/lib/useSchemaOrg';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!Array.isArray(params.slug)) {
@@ -51,6 +52,13 @@ const PostPage: React.FC<Props> = ({ post }) => {
         {post.metaData.titleImage && (
           <link rel='preload' href={post.metaData.titleImage} as='image' />
         )}
+
+        {useSchemaOrg({
+          webpage: {
+            pageTitle: post.metaData.title,
+            pageDescription: post.metaData.description
+          }
+        })}
       </Head>
 
       <PostComponent post={post} />

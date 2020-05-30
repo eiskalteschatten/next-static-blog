@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Container from 'react-bootstrap/Container';
 
 import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSchemaOrg from '~/lib/useSchemaOrg';
 import { PostMetaData, getMetaDataForCategoryPosts } from '~/blog';
 import categories, { Category } from '~/blog/categories';
 import PostList from '~/components/posts/PostList';
@@ -54,6 +55,13 @@ const CategoryPage: React.FC<Props> = ({ category, postMetaData }) => {
         {useStadandardHeaderTags({
           title: category.name,
           description: category.description
+        })}
+        {useSchemaOrg({
+          webpage: {
+            pageTitle: category.name,
+            pageDescription: category.description
+          },
+          collectionPage: true
         })}
       </Head>
 

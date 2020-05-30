@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Container from 'react-bootstrap/Container';
 
 import useStadandardHeaderTags from '~/lib/useStandardHeaderTags';
+import useSchemaOrg from '~/lib/useSchemaOrg';
 import { getMetaDataForPosts, PostMetaData } from '~/blog';
 import PostList from '~/components/posts/PostList';
 
@@ -24,10 +25,18 @@ interface Props {
 }
 
 const PostsPage: React.FC<Props> = ({ postMetaData }) => {
+  const title = 'All Posts';
+
   return (
     <Container>
       <Head>
-        {useStadandardHeaderTags({ title: 'All Posts' })}
+        {useStadandardHeaderTags({ title })}
+        {useSchemaOrg({
+          webpage: {
+            pageTitle: title
+          },
+          collectionPage: true
+        })}
       </Head>
 
       <div>

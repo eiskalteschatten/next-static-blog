@@ -4,28 +4,31 @@ import { useRouter } from 'next/router';
 import {
   Person,
   WebSite,
-  WebPage
+  WebPage,
+  CollectionPage
 } from 'schema-dts';
 
 import siteSettings from '~/siteSettings';
 
 interface Options {
   webpage?: {
-    pageTitle?: string;
+    pageTitle: string;
     pageDescription?: string;
   };
+  collectionPage?: boolean;
 }
 
 const useSchemaOrg = (options?: Options): any => {
   const router = useRouter();
+  const { pageTitle, pageDescription } = options?.webpage || {};
+  // const { pageTitle, pageDescription } = options?.collectionPage || {};
 
-  const {
-    webpage: { pageTitle, pageDescription }
-  } = options || {};
+  const name = options?.webpage ? `${pageTitle} - ${siteSettings.siteTitle}` : siteSettings.siteTitle;
+  const url = `${siteSettings.siteUrl}${router.asPath}`;
 
   const person: Person = {
     '@type': 'Person',
-    '@id': `${siteSettings.siteUrl}/#/schema/person`,
+    '@id': `${siteSettings.siteUrl}/#/person`,
     name: 'Alex Seifert',
     image: {
       '@type': 'ImageObject',
@@ -39,12 +42,12 @@ const useSchemaOrg = (options?: Options): any => {
 
   const website: WebSite = {
     '@type': 'WebSite',
-    '@id': '/#website',
+    '@id': `${siteSettings.siteUrl}/#website`,
     url: siteSettings.siteUrl,
     name: siteSettings.siteTitle,
     description: siteSettings.siteDescription,
     publisher: {
-      '@id': `${siteSettings.siteUrl}/#/schema/person`
+      '@id': `${siteSettings.siteUrl}/#/person`
     },
     // potentialAction: [
     //   {
@@ -58,9 +61,9 @@ const useSchemaOrg = (options?: Options): any => {
 
   const webpage: WebPage = {
     '@type': 'WebPage',
-    '@id': `${siteSettings.siteUrl}${router.asPath}/#webpage`,
-    url: `${siteSettings.siteUrl}${router.asPath}`,
-    name: pageTitle ? `${pageTitle} - ${siteSettings.siteTitle}` : siteSettings.siteTitle,
+    '@id': `${url}/#webpage`,
+    url,
+    name,
     isPartOf: {
       '@id': `${siteSettings.siteUrl}/#website`
     },
@@ -72,7 +75,7 @@ const useSchemaOrg = (options?: Options): any => {
       {
         '@type': 'ReadAction',
         target: [
-          `${siteSettings.siteUrl}${router.asPath}`
+          url
         ]
       }
     ]
@@ -80,8 +83,24 @@ const useSchemaOrg = (options?: Options): any => {
 
   const schema = {
     '@context': 'https://schema.org',
-    '@graph': [person, website, webpage]
+    '@graph': [person, website, webpage] as any
   };
+
+
+  if (options?.collectionPage) {
+    const collectionPage: CollectionPage = {
+      '@type': 'CollectionPage',
+      '@id':  `${url}/#webpage`,
+      url,
+      name,
+      isPartOf: {
+        '@id':  `${siteSettings.siteUrl}/#website`
+      },
+      inLanguage: siteSettings.siteLanguage
+    };
+
+    schema['@graph'].push(collectionPage);
+  }
 
   return (
     <script
