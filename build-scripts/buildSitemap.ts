@@ -79,7 +79,7 @@ const scanPages = (folder: string): void => {
 
         xml += `
           <url>
-            <loc>${url}${subdir}${slug}}</loc>
+            <loc>${url}${subdir}${slug}</loc>
             <lastmod>${now}</lastmod>
           </url>
         `;
