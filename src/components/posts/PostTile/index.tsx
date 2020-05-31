@@ -15,7 +15,7 @@ interface Props {
 const PostTile: React.FC<Props> = ({ metaData }) => {
   return (
     <Col md={6} lg={4} className={styles.postTile}>
-      <Link href={`/post/${metaData.slug}`} passHref>
+      <Link href='/post/[slug]' as={`/post/${metaData.slug}`} passHref>
         <a className={styles.link}>
           <div
             className={styles.titleImage}

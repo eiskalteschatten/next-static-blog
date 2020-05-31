@@ -38,7 +38,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
 
         <div className={styles.publishedDate}>
           {publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} at {publishedDate.toLocaleTimeString('en-US')}
-          <Link href={archivesLink} passHref>
+          <Link href='/archives/[...slug]' as={archivesLink} passHref>
             <a className='btn btn-sm btn-light ml-3'>&#x2192;</a>
           </Link>
         </div>

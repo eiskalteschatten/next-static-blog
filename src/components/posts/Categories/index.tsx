@@ -13,7 +13,7 @@ const Categories: React.FC<Props> = ({ categoryKeys }) => {
   return (
     <div className={styles.categories}>
       {categoryKeys.map((categoryKey: string, index: number): any => (
-        <Link href={`/category/${categories[categoryKey].slug}`} passHref key={index}>
+        <Link href='/category/[slug]' as={`/category/${categories[categoryKey].slug}`} passHref key={index}>
           <a className={styles.categoryPill}>
             {categories[categoryKey].name}
           </a>

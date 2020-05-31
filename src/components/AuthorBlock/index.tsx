@@ -21,7 +21,7 @@ const AuthorBlock: React.FC<Props> = ({ authorKey }) => {
         </span>
       )}
 
-      <Link href={`/author/${authorKey}`} passHref>
+      <Link href='/author/[slug]' as={`/author/${authorKey}`} passHref>
         <a>{author.name}</a>
       </Link>
     </>
