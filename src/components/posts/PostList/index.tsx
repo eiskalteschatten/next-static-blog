@@ -26,8 +26,6 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
   const newPostMetaData = Object.assign([], postMetaData);
   const splicedData = newPostMetaData.splice(offset, offset + maxPosts);
 
-  // const handlePaginationClick = ()
-
   return (
     <>
       <Row>
@@ -41,7 +39,6 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
       </Row>
 
       <div className={styles.pagination}>
-
         {Array.from({ length: pageCount }, (_, i) => i + 1).map((count: number) => (
           <span key={count}>
             <Link href={`?page=${count}`} passHref>
