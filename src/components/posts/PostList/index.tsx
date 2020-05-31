@@ -38,22 +38,24 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
         )}
       </Row>
 
-      <div className={styles.pagination}>
-        {Array.from({ length: pageCount }, (_, i) => i + 1).map((count: number) => (
-          <span key={count}>
-            <Link href={`?page=${count}`} passHref>
-              <a
-                className={clsx({
-                  [styles.link]: true,
-                  [styles.active]: page === count
-                })}
-              >
-                {count}
-              </a>
-            </Link>
-          </span>
-        ))}
-      </div>
+      {pageCount > 1 && (
+        <div className={styles.pagination}>
+          {Array.from({ length: pageCount }, (_, i) => i + 1).map((count: number) => (
+            <span key={count}>
+              <Link href={`?page=${count}`} passHref>
+                <a
+                  className={clsx({
+                    [styles.link]: true,
+                    [styles.active]: page === count
+                  })}
+                >
+                  {count}
+                </a>
+              </Link>
+            </span>
+          ))}
+        </div>
+      )}
     </>
   );
 };
