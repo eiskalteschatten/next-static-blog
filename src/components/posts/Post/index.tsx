@@ -7,8 +7,8 @@ import Container from 'react-bootstrap/Container';
 import styles from './Post.module.scss';
 
 import { Post } from '~/blog';
-import CodeBlock from '../../CodeBlock';
-import AuthorBlock from '../../AuthorBlock';
+import CodeBlock from '../../elements/CodeBlock';
+import AuthorBlock from '../../elements/AuthorBlock';
 import Categories from '../Categories';
 
 interface Props {

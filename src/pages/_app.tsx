@@ -3,7 +3,7 @@ import React from 'react';
 import 'nprogress/nprogress.css';
 import '~/scss/styles.scss';
 
-import Layout from '~/components/Layout';
+import Layout from '~/components/layout/Layout';
 
 const App: any = ({ Component, pageProps }) => {
   return (

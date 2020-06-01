@@ -11,7 +11,7 @@ import useSchemaOrg from '~/lib/useSchemaOrg';
 import { PostMetaData, getMetaDataForAuthorPosts } from '~/blog';
 import authors, { Author } from '~/blog/authors';
 import PostList from '~/components/posts/PostList';
-import Avatar from '~/components/Avatar';
+import Avatar from '~/components/elements/Avatar';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let authorKey: string;
