@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown/with-html';
 
 import Container from 'react-bootstrap/Container';
 
@@ -51,6 +51,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
           <ReactMarkdown
             source={post.body}
             renderers={{ code: CodeBlock }}
+            escapeHtml={false}
           />
         </div>
 
