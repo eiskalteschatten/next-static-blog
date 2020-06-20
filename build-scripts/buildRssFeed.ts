@@ -28,7 +28,11 @@ let postFolders = fs.readdirSync(postsFolder);
 postFolders = postFolders.filter(folder => fs.lstatSync(path.resolve(postsFolder, folder)).isDirectory());
 postFolders = postFolders.reverse();
 
-for (const folder of postFolders) {
+const maxPostsDef = 30;
+const maxPosts = postFolders.length > maxPostsDef ? maxPostsDef : postFolders.length;
+
+for (let i = 0; i < maxPosts; i++) {
+  const folder =  postFolders[i];
   const folderPath = path.resolve(postsFolder, folder);
 
   const metaDataString = fs.readFileSync(`${folderPath}/meta.json`, 'utf8');
