@@ -3,7 +3,6 @@ import fs from 'fs';
 
 import siteSettings from '../src/siteSettings';
 
-import { convertFolderNameToSlug } from '../src/blog';
 import authors from '../src/blog/authors';
 import categories from '../src/blog/categories';
 
@@ -34,12 +33,12 @@ for (const folder of postFolders) {
   const metaDataString = fs.readFileSync(`${folderPath}/meta.json`, 'utf8');
   const metaData = JSON.parse(metaDataString);
 
-  const slug = convertFolderNameToSlug(folder);
+  const lastmod = new Date(metaData.updatedAt);
 
   xml += `
     <url>
-      <loc>${url}/post/${slug}</loc>
-      <lastmod>${metaData.updatedAt}</lastmod>
+      <loc>${url}/post/${folder}</loc>
+      <lastmod>${lastmod.toISOString()}</lastmod>
     </url>
   `;
 }
