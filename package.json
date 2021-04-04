@@ -7,7 +7,8 @@
     "prebuild": "TS_NODE_PROJECT=tsconfig.build.json ts-node ./build-scripts/prebuild.ts",
     "build": "next build",
     "start": "next start -p $PORT",
-    "lint": "eslint './**/*.{tsx,ts,js}'"
+    "lint": "eslint './**/*.{tsx,ts,js}'",
+    "prepare": "husky install"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
@@ -30,17 +31,12 @@
     "eslint": "^7.23.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-react": "^7.23.1",
-    "husky": "^5.2.0",
+    "husky": "^6.0.0",
     "marked": "^2.0.1",
     "raw-loader": "^4.0.2",
     "rss": "^1.2.2",
     "schema-dts": "^0.8.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run lint"
-    }
   }
 }
