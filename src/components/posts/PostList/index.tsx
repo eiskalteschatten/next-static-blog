@@ -42,7 +42,7 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
         <div className={styles.pagination}>
           {Array.from({ length: pageCount }, (_, i) => i + 1).map((count: number) => (
             <span key={count}>
-              <Link href={`?page=${count}`} passHref>
+              <Link href={`${router.route}?page=${count}`} as={`${router.asPath}?page=${count}`} passHref>
                 <a
                   className={clsx({
                     [styles.link]: true,
