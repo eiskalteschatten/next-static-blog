@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
@@ -16,6 +16,7 @@ interface Props {
 
 const PostList: React.FC<Props> = ({ postMetaData }) => {
   const router = useRouter();
+  const [asPath, setAsPath] = useState<string>();
   const page = Number(router.query.page) || 1;
   const maxPosts = parseInt(process.env.NEXT_PUBLIC_MAX_POSTS_PER_PAGE);
   const offset = maxPosts * (page - 1);
@@ -25,6 +26,11 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
   // isn't affected. Strange things happen otherwise.
   const newPostMetaData = Object.assign([], postMetaData);
   const splicedData = newPostMetaData.splice(offset, offset + maxPosts);
+
+  useEffect(() => {
+    const path = router.asPath.split('?');
+    setAsPath(path[0]);
+  }, [router.asPath]);
 
   return (
     <>
@@ -42,7 +48,14 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
         <div className={styles.pagination}>
           {Array.from({ length: pageCount }, (_, i) => i + 1).map((count: number) => (
             <span key={count}>
-              <Link href={`${router.route}?page=${count}`} as={`${router.asPath}?page=${count}`} passHref>
+              <Link
+                href={{
+                  pathname: `${router.route}`,
+                  query: { page: count },
+                }}
+                as={`${asPath}?page=${count}`}
+                passHref
+              >
                 <a
                   className={clsx({
                     [styles.link]: true,
