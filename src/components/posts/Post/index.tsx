@@ -1,13 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown/with-html';
 
 import Container from 'react-bootstrap/Container';
 
 import styles from './Post.module.scss';
 
+import ReactMarkdown from '../../elements/ReactMarkDown';
 import { Post } from '~/blog';
-import CodeBlock from '../../elements/CodeBlock';
 import AuthorBlock from '../../elements/AuthorBlock';
 import Categories from '../Categories';
 
@@ -48,11 +47,9 @@ const PostComponent: React.FC<Props> = ({ post }) => {
         </div>
 
         <div className='mb-5'>
-          <ReactMarkdown
-            source={post.body}
-            renderers={{ code: CodeBlock }}
-            escapeHtml={false}
-          />
+          <ReactMarkdown>
+            {post.body}
+          </ReactMarkdown>
         </div>
 
         <div>

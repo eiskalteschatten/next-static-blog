@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
 
 import Col from 'react-bootstrap/Col';
 
+import ReactMarkdown from '../../elements/ReactMarkDown';
+import { PostMetaData } from '~/blog';
+
 import styles from './PostTile.module.scss';
 
-import { PostMetaData } from '~/blog';
 
 interface Props {
   metaData: PostMetaData;
@@ -29,7 +30,7 @@ const PostTile: React.FC<Props> = ({ metaData }) => {
           </h2>
 
           {metaData.excerpt && (
-            <ReactMarkdown source={metaData.excerpt} />
+            <ReactMarkdown>{metaData.excerpt}</ReactMarkdown>
           )}
         </a>
       </Link>

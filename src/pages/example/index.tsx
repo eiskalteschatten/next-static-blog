@@ -1,17 +1,17 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown/with-html';
 
 import Container from 'react-bootstrap/Container';
+
+import ReactMarkdown from '../../components/elements/ReactMarkDown';
 
 import content from './index.md';
 
 const ExamplePage: React.FC = () => {
   return (
     <Container>
-      <ReactMarkdown
-        source={content}
-        escapeHtml={false}
-      />
+      <ReactMarkdown>
+        {content}
+      </ReactMarkdown>
     </Container>
   );
 };
