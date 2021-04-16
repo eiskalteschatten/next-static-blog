@@ -4,7 +4,7 @@ import rehypeRaw from 'rehype-raw';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-const components = {
+const components: any = {
   code({ className, ...props }): any {
     const match = /language-(\w+)/.exec(className || '');
     return match
