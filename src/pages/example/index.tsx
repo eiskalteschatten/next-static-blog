@@ -2,7 +2,7 @@ import React from 'react';
 
 import Container from 'react-bootstrap/Container';
 
-import ReactMarkdown from '../../components/elements/ReactMarkDown';
+import ReactMarkdown from '../../components/elements/ReactMarkdown';
 
 import content from './index.md';
 

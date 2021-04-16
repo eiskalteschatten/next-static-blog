@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 
 import styles from './Post.module.scss';
 
-import ReactMarkdown from '../../elements/ReactMarkDown';
+import ReactMarkdown from '../../elements/ReactMarkdown';
 import { Post } from '~/blog';
 import AuthorBlock from '../../elements/AuthorBlock';
 import Categories from '../Categories';

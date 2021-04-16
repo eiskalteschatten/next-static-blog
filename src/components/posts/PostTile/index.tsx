@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import Col from 'react-bootstrap/Col';
 
-import ReactMarkdown from '../../elements/ReactMarkDown';
+import ReactMarkdown from '../../elements/ReactMarkdown';
 import { PostMetaData } from '~/blog';
 
 import styles from './PostTile.module.scss';
