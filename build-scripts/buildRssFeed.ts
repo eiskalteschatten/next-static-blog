@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import marked from 'marked';
+import { marked } from 'marked';
 import RSS from 'rss';
 
 import siteSettings from '../src/siteSettings';
@@ -39,7 +39,7 @@ for (let i = 0; i < maxPosts; i++) {
   const metaData = JSON.parse(metaDataString);
 
   const contentMarkdown = fs.readFileSync(`${folderPath}/index.md`, 'utf8');
-  const contentHtml = marked(contentMarkdown);
+  const contentHtml = marked.parse(contentMarkdown);
 
   const slug = convertFolderNameToSlug(folder);
 
