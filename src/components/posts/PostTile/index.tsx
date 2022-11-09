@@ -16,23 +16,21 @@ interface Props {
 const PostTile: React.FC<Props> = ({ metaData }) => {
   return (
     <Col md={6} lg={4} className={styles.postTile}>
-      <Link href='/post/[...slug]' as={`/post/${metaData.slug}`} passHref>
-        <a className={styles.link}>
-          <div
-            className={styles.titleImage}
-            style={{
-              backgroundImage: `url('${metaData.titleImage}')`
-            }}
-          />
+      <Link href='/post/[...slug]' as={`/post/${metaData.slug}`} className={styles.link}>
+        <div
+          className={styles.titleImage}
+          style={{
+            backgroundImage: `url('${metaData.titleImage}')`
+          }}
+        />
 
-          <h2 className={styles.title}>
-            {metaData.title}
-          </h2>
+        <h2 className={styles.title}>
+          {metaData.title}
+        </h2>
 
-          {metaData.excerpt && (
-            <ReactMarkdown>{metaData.excerpt}</ReactMarkdown>
-          )}
-        </a>
+        {metaData.excerpt && (
+          <ReactMarkdown>{metaData.excerpt}</ReactMarkdown>
+        )}
       </Link>
     </Col>
   );

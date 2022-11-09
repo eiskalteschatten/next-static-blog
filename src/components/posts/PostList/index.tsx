@@ -54,16 +54,12 @@ const PostList: React.FC<Props> = ({ postMetaData }) => {
                   query: { page: count },
                 }}
                 as={`${asPath}?page=${count}`}
-                passHref
+                className={clsx({
+                  [styles.link]: true,
+                  [styles.active]: page === count
+                })}
               >
-                <a
-                  className={clsx({
-                    [styles.link]: true,
-                    [styles.active]: page === count
-                  })}
-                >
-                  {count}
-                </a>
+                {count}
               </Link>
             </span>
           ))}

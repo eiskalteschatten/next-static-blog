@@ -11,20 +11,20 @@ const NavBar: React.FC = () => {
       </div>
 
       <div className={styles.nav}>
-        <Link href='/' passHref>
-          <a className={styles.navItem}>Home</a>
+        <Link href='/' className={styles.navItem}>
+          Home
         </Link>
 
-        <Link href='/posts' passHref>
-          <a className={styles.navItem}>All Posts</a>
+        <Link href='/posts' className={styles.navItem}>
+          All Posts
         </Link>
 
-        <Link href='/example' passHref>
-          <a className={styles.navItem}>Example Page</a>
+        <Link href='/example' className={styles.navItem}>
+          Example Page
         </Link>
 
-        <Link href='/feed.xml' passHref>
-          <a className={styles.navItem}>RSS Feed</a>
+        <Link href='/feed.xml' className={styles.navItem}>
+          RSS Feed
         </Link>
       </div>
     </div>
